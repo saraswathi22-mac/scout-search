@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search";
 import "./SearchPage.css";
 import { useStateValue } from "../../context/StateProvider";
-import useGoogleSearch from "../../services/useGoogleSearch";
+import { useGoogleSearch } from "../../services/useGoogleSearch";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Dropdown from "../../components/DropDown/Dropdown";
 
 function SearchPage() {
-  const { term, dispatch} = useStateValue();
-  const { data } = useGoogleSearch(term['term']);
+  const { term, dispatch } = useStateValue();
+  const { data } = useGoogleSearch(term["term"]);
   const [show, setShow] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ function SearchPage() {
           />
         </Link>
         <div className="sP_headerBody">
-          <Search hideButtons={true} inputValue={term['term']} />
+          <Search hideButtons={true} inputValue={term["term"]} />
           <div className="sP_options">
             <div className="sP_optionsLeft">
               <div className="sP_option">
@@ -63,7 +63,7 @@ function SearchPage() {
         </div>
       </div>
 
-      {term['term'] && (
+      {term["term"] && (
         <div className="results">
           <p className="resultsCount">
             About {data?.searchInformation.formattedTotalResults} results (

@@ -33,8 +33,10 @@ function Search({ hideButtons, inputValue }) {
 
   const navigate = useNavigate();
 
-  const search = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
+    const trimmed = input.trim();
+    if (!trimmed) return;
     dispatch({
       type: actionTypes.SET_SEARCH_TERM,
       term: !inputValue ? input : termInput,
@@ -43,7 +45,7 @@ function Search({ hideButtons, inputValue }) {
   };
 
   return (
-    <form className="search" onSubmit={search}>
+    <form className="search" onSubmit={handleSearch}>
       <div className="search_data">
         {!inputValue ? (
           <input value={input} onChange={(e) => setInput(e.target.value)} />

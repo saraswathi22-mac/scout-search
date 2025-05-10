@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Search.css";
 import MicIcon from "@mui/icons-material/Mic";
+import SearchIcon from "@mui/icons-material/Search";
 import {
   Button,
   Dialog,
@@ -47,6 +48,7 @@ function Search({ hideButtons, inputValue }) {
   return (
     <form className="search" onSubmit={handleSearch}>
       <div className="search_data">
+        <SearchIcon className="searchIcon" />
         {!inputValue ? (
           <input value={input} onChange={(e) => setInput(e.target.value)} />
         ) : (

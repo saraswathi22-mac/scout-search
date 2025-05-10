@@ -1,9 +1,7 @@
 import React from "react";
 import "./DropDown.css";
 
-const items = ["Maps", "Books", "Flights", "Finance"];
-
-const Dropdown = ({ show }) => {
+const Dropdown = ({ show, items }) => {
   return (
     <div className={`dropdown ${show ? "block" : "hidden"}`}>
       {items.map((item) => (

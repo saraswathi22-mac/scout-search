@@ -67,10 +67,10 @@ function SearchPage() {
             About {data?.searchInformation.formattedTotalResults} results (
             {data?.searchInformation.formattedSearchTime} seconds)
           </p>
-          
+
           {data?.items?.map((item) => (
             <div className="result" key={item.link}>
-              <a href={item.link}>
+              <a href={item.link} className="resultLink">
                 {item.pagemap?.cse_image?.[0]?.src && (
                   <img
                     className="resultImage"
@@ -78,7 +78,7 @@ function SearchPage() {
                     alt={item.title}
                   />
                 )}
-                {item.link}
+                {item.displayLink}
               </a>
 
               <a className="resultTitle" href={item.link}>

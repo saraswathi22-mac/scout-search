@@ -34,7 +34,7 @@
   font-size: 14px;
   padding-top: 2rem;
   height: 20px;
-  gap: 25rem;
+  gap: 18rem;
 }
 
 .sP_optionsLeft,
@@ -51,6 +51,12 @@
 .sP_option a {
   text-decoration: none;
   color: #70757a;
+}
+
+.sP_option.active {
+  color: black;
+  text-decoration: underline;
+  font-weight: 900;
 }
 
 .sP_option_dropdown {

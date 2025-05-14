@@ -16,6 +16,7 @@ function SearchPage() {
   const { term, dispatch } = useStateValue();
   const { data } = useGoogleSearch(term["term"]);
   const [show, setShow] = useState(false);
+  const [activeLabel, setActiveLabel] = useState("All");
 
   return (
     <div className="searchPage">
@@ -33,8 +34,18 @@ function SearchPage() {
           <nav className="sP_options">
             <div className="sP_optionsLeft">
               {searchPageOptionsLeft.map((label, idx) => (
-                <div className="sP_option" key={idx}>
-                  <Link to={`/${label.toLowerCase()}`}>{label}</Link>
+                <div
+                  className={`sP_option ${
+                    activeLabel === label ? "active" : ""
+                  }`}
+                  key={idx}
+                  onClick={() => setActiveLabel(label)}
+                >
+                  <Link
+                    to={label === "All" ? "/search" : `/${label.toLowerCase()}`}
+                  >
+                    {label}
+                  </Link>
                 </div>
               ))}
 

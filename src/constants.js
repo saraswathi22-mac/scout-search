@@ -3,6 +3,7 @@ export const searchPageOptionsLeft = [
   "Images",
   "Shopping",
   "Videos",
+  "Short Videos",
   "News",
 ];
 

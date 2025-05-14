@@ -78,12 +78,7 @@
 
 .results {
   max-width: 650px;
-  margin: 20px 200px 100px;
-}
-
-.resultsCount {
-  color: #5e5e5e;
-  font-size: 14px;
+  margin: 20px 224px 100px;
 }
 
 .result {
@@ -109,7 +104,5 @@
 }
 
 .resultSnippet {
-  margin-top: 10px;
+  margin-top: 8px;
 }
-
-

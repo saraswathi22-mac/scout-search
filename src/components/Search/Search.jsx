@@ -20,8 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
-  const [input, setInput] = useState("");
-  const [termInput, setTermInput] = useState(inputValue);
+  const [input, setInput] = useState("" || inputValue);
   const [open, setOpen] = useState(false);
 
   const openModal = () => {
@@ -36,11 +35,11 @@ function Search({ hideButtons, inputValue }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const trimmed = input.trim();
-    if (!trimmed) return;
+    const trimmedInput = input.trim();
+    if (!trimmedInput) return;
     dispatch({
       type: actionTypes.SET_SEARCH_TERM,
-      term: !inputValue ? input : termInput,
+      term: trimmedInput || inputValue,
     });
     navigate("/search");
   };
@@ -49,14 +48,7 @@ function Search({ hideButtons, inputValue }) {
     <form className="search" onSubmit={handleSearch}>
       <div className="search_data">
         <SearchIcon className="searchIcon" />
-        {!inputValue ? (
-          <input value={input} onChange={(e) => setInput(e.target.value)} />
-        ) : (
-          <input
-            value={termInput}
-            onChange={(e) => setTermInput(e.target.value)}
-          />
-        )}
+        <input value={input} onChange={(e) => setInput(e.target.value)} />
         <MicIcon />
       </div>
       {!hideButtons ? (

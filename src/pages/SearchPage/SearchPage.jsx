@@ -14,7 +14,7 @@ import {
 
 function SearchPage() {
   const { term, dispatch } = useStateValue();
-  const { data } = useGoogleSearch(term["term"]);
+  const { data } = useGoogleSearch(term?.term);
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");
 

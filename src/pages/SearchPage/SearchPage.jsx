@@ -11,6 +11,7 @@ import {
   searchPageOptionsLeft,
   searchPageOptionsRight,
 } from "../../constants";
+import { getSiteName } from "../../getSiteName";
 
 function SearchPage() {
   const { term, dispatch } = useStateValue();
@@ -81,10 +82,11 @@ function SearchPage() {
                   <img
                     className="resultImage"
                     src={item.pagemap.cse_image[0].src}
-                    alt={item.title}
+                    // alt={item.title}
                   />
                 )}
-                {item.displayLink}
+                <div>{getSiteName(item.displayLink)}</div>
+                <div>{item.displayLink}</div>
               </a>
 
               <a className="resultTitle" href={item.link}>

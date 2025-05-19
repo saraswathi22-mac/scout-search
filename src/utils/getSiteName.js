@@ -3,12 +3,10 @@ export const getSiteName = (url) => {
     const { hostname } = new URL(url.includes("http") ? url : `https://${url}`);
     const parts = hostname.replace(/^www\./, "").split(".");
 
-    if (parts.length >= 2) {
-      return parts[parts.length - 2];
-    }
-
-    return hostname;
+    return parts.length >= 2 ? capitalize(parts[parts.length - 2]) : hostname;
   } catch (err) {
     return url;
   }
 };
+
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);

@@ -106,3 +106,22 @@
 .resultSnippet {
   margin-top: 8px;
 }
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.result {
+  flex: 1;
+  max-width: calc(100% - 20px);
+}
+
+.resultThumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin: 25px 0;
+}

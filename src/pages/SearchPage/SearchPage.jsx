@@ -12,6 +12,7 @@ import {
   searchPageOptionsRight,
 } from "../../constants";
 import SiteInfo from "../../components/SiteInfo/SiteInfo";
+import { getFavicon } from "../../utils/getFavicon";
 
 function SearchPage() {
   const { term, dispatch } = useStateValue();
@@ -76,12 +77,26 @@ function SearchPage() {
       {term?.term && (
         <div className="results">
           {data?.items?.map((item) => (
-            <div className="result" key={item.link}>
-              <SiteInfo url={item.link} />
-              <a className="resultTitle" href={item.link}>
-                <h2>{item.title}</h2>
-              </a>
-              <p className="resultSnippet">{item.snippet}</p>
+            <div className="resultRow" key={item.link}>
+              <div className="result">
+                <SiteInfo url={item.link} />
+                <a className="resultTitle" href={item.link}>
+                  <h2>{item.title}</h2>
+                </a>
+                <p className="resultSnippet">{item.snippet}</p>
+              </div>
+
+              {item.pagemap?.cse_image?.[0]?.src ? (
+                <img
+                  className="resultThumbnail"
+                  src={item.pagemap.cse_image[0].src}
+                  alt="Thumbnail"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = getFavicon(item.link);
+                  }}
+                />
+              ) : null}
             </div>
           ))}
         </div>

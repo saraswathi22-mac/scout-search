@@ -1,0 +1,14 @@
+.site-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #1a0dab;
+}
+
+.site-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}

@@ -11,7 +11,7 @@ import {
   searchPageOptionsLeft,
   searchPageOptionsRight,
 } from "../../constants";
-import { getSiteName } from "../../getSiteName";
+import SiteInfo from "../../components/SiteInfo/SiteInfo";
 
 function SearchPage() {
   const { term, dispatch } = useStateValue();
@@ -77,18 +77,7 @@ function SearchPage() {
         <div className="results">
           {data?.items?.map((item) => (
             <div className="result" key={item.link}>
-              <a href={item.link} className="resultLink">
-                {item.pagemap?.cse_image?.[0]?.src && (
-                  <img
-                    className="resultImage"
-                    src={item.pagemap.cse_image[0].src}
-                    // alt={item.title}
-                  />
-                )}
-                <div>{getSiteName(item.displayLink)}</div>
-                <div>{item.displayLink}</div>
-              </a>
-
+              <SiteInfo url={item.link} />
               <a className="resultTitle" href={item.link}>
                 <h2>{item.title}</h2>
               </a>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search";
 import "./SearchPage.css";
@@ -15,7 +15,7 @@ import SiteInfo from "../../components/SiteInfo/SiteInfo";
 import { getFavicon } from "../../utils/getFavicon";
 
 function SearchPage() {
-  const { term, dispatch } = useStateValue();
+  const { term } = useStateValue();
   const { data } = useGoogleSearch(term?.term);
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");
@@ -30,6 +30,7 @@ function SearchPage() {
             alt="Google Logo"
           />
         </Link>
+
         <div className="sP_headerBody">
           <Search hideButtons inputValue={term?.term} />
 
@@ -59,7 +60,8 @@ function SearchPage() {
                   <MoreVertIcon className="moreVertIcon" />
                   <div>More</div>
                 </button>
-                {show ? <Dropdown show={show} items={searchPageMore} /> : " "}
+
+                {show && <Dropdown show={show} items={searchPageMore} />}
               </div>
             </div>
 
@@ -76,32 +78,45 @@ function SearchPage() {
 
       {term?.term && (
         <div className="results">
-          {data?.items?.map((item) => (
-            <div className="resultRow" key={item.link}>
-              <div className="result">
-                <SiteInfo url={item.link} />
-                <a className="resultTitle" href={item.link}>
-                  <h2>{item.title}</h2>
-                </a>
-                <p className="resultSnippet">{item.snippet}</p>
-              </div>
+          {data?.items?.length ? (
+            data.items.map((item) => (
+              <div className="resultRow" key={item.link}>
+                <div className="result">
+                  <SiteInfo url={item.link} />
 
-              {item.pagemap?.cse_image?.[0]?.src ? (
-                <img
-                  className="resultThumbnail"
-                  src={item.pagemap.cse_image[0].src}
-                  alt="Thumbnail"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = getFavicon(item.link);
-                  }}
-                />
-              ) : null}
-            </div>
-          ))}
+                  <a
+                    className="resultTitle"
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.title}
+                  </a>
+
+                  <p className="resultSnippet">{item.snippet}</p>
+                </div>
+
+                {item?.pagemap?.cse_image?.[0]?.src && (
+                  <img
+                    className="resultThumbnail"
+                    src={item.pagemap.cse_image[0].src}
+                    alt="Thumbnail"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = getFavicon(item.link);
+                    }}
+                  />
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="noResults">No results found.</p>
+          )}
         </div>
       )}
     </div>
+
+
   );
 }
 

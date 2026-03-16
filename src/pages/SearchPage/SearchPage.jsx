@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search";
 import "./SearchPage.css";
@@ -17,8 +17,23 @@ import { getFavicon } from "../../utils/getFavicon";
 function SearchPage() {
   const { term } = useStateValue();
   const { data } = useGoogleSearch(term?.term);
+
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (data) {
+      setLoading(false);
+    }
+  }, [data]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const closeDropdown = () => setShow(false);
+    window.addEventListener("click", closeDropdown);
+    return () => window.removeEventListener("click", closeDropdown);
+  }, []);
 
   return (
     <div className="searchPage">
@@ -38,9 +53,8 @@ function SearchPage() {
             <div className="sP_optionsLeft">
               {searchPageOptionsLeft.map((label, idx) => (
                 <div
-                  className={`sP_option ${
-                    activeLabel === label ? "active" : ""
-                  }`}
+                  className={`sP_option ${activeLabel === label ? "active" : ""
+                    }`}
                   key={idx}
                   onClick={() => setActiveLabel(label)}
                 >
@@ -54,7 +68,10 @@ function SearchPage() {
 
               <div className="sP_option_dropdown">
                 <button
-                  onClick={() => setShow(!show)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShow(!show);
+                  }}
                   className="sP_option_dropdown_btn"
                 >
                   <MoreVertIcon className="moreVertIcon" />
@@ -78,45 +95,55 @@ function SearchPage() {
 
       {term?.term && (
         <div className="results">
-          {data?.items?.length ? (
-            data.items.map((item) => (
-              <div className="resultRow" key={item.link}>
-                <div className="result">
-                  <SiteInfo url={item.link} />
 
-                  <a
-                    className="resultTitle"
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {item.title}
-                  </a>
+          {loading ? (
+            <p className="loadingText">Loading results...</p>
+          ) : data?.items?.length ? (
+            <>
+              <p className="resultsInfo">
+                About {data?.searchInformation?.formattedTotalResults} results
+                ({data?.searchInformation?.formattedSearchTime} seconds)
+              </p>
 
-                  <p className="resultSnippet">{item.snippet}</p>
+              {data.items.map((item) => (
+                <div className="resultRow" key={item.link}>
+                  <div className="result">
+                    <SiteInfo url={item.link} />
+
+                    <a
+                      className="resultTitle"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.title}
+                    </a>
+
+                    <p className="resultSnippet">{item.snippet}</p>
+                  </div>
+
+                  {item?.pagemap?.cse_image?.[0]?.src && (
+                    <img
+                      className="resultThumbnail"
+                      src={item.pagemap.cse_image[0].src}
+                      alt="Thumbnail"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = getFavicon(item.link);
+                      }}
+                    />
+                  )}
                 </div>
-
-                {item?.pagemap?.cse_image?.[0]?.src && (
-                  <img
-                    className="resultThumbnail"
-                    src={item.pagemap.cse_image[0].src}
-                    alt="Thumbnail"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = getFavicon(item.link);
-                    }}
-                  />
-                )}
-              </div>
-            ))
+              ))}
+            </>
           ) : (
             <p className="noResults">No results found.</p>
           )}
+
         </div>
       )}
+
     </div>
-
-
   );
 }
 

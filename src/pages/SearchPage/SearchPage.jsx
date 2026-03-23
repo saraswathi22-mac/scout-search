@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search";
 import "./SearchPage.css";
@@ -13,22 +13,25 @@ import {
 } from "../../constants";
 import SiteInfo from "../../components/SiteInfo/SiteInfo";
 import { getFavicon } from "../../utils/getFavicon";
+import { useDebounce } from "../../hooks/useDebounce";
 
 function SearchPage() {
   const { term } = useStateValue();
-  const { data } = useGoogleSearch(term?.term);
+  const debouncedTerm = useDebounce(term?.term, 500);
+  const { data } = useGoogleSearch(debouncedTerm);
 
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (data) {
-      setLoading(false);
-    }
+    setLoading(true);
+  }, [debouncedTerm]);
+
+  useEffect(() => {
+    if (data) setLoading(false);
   }, [data]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const closeDropdown = () => setShow(false);
     window.addEventListener("click", closeDropdown);

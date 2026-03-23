@@ -14,6 +14,7 @@ import {
 import SiteInfo from "../../components/SiteInfo/SiteInfo";
 import { getFavicon } from "../../utils/getFavicon";
 import { useDebounce } from "../../hooks/useDebounce";
+import ResultSkeleton from "../../components/ResultSkeleton/ResultSkeleton";
 
 function SearchPage() {
   const { term } = useStateValue();
@@ -100,7 +101,11 @@ function SearchPage() {
         <div className="results">
 
           {loading ? (
-            <p className="loadingText">Loading results...</p>
+            <>
+              {[...Array(6)].map((_, i) => (
+                <ResultSkeleton key={i} />
+              ))}
+            </>
           ) : data?.items?.length ? (
             <>
               <p className="resultsInfo">

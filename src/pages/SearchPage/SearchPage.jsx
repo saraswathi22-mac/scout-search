@@ -47,7 +47,6 @@ function SearchPage() {
         part
       )
     );
-
   };
 
   useEffect(() => {
@@ -64,115 +63,124 @@ function SearchPage() {
     return () => window.removeEventListener("click", closeDropdown);
   }, []);
 
-  return (<div className="searchPage"> <header className="sP_header"> <Link to="/"> <img
-    className="sP_logo"
-    src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-    alt="Google Logo"
-  /> </Link>
+  return (
+    <div className="searchPage">
+      {/* 🔹 Header */}
+      <header className="sP_header">
+        <Link to="/">
+          <img
+            className="sP_logo"
+            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+            alt="Google Logo"
+          />
+        </Link>
 
-    ```
-    <div className="sP_headerBody">
-      <Search hideButtons inputValue={term?.term} />
+        <div className="sP_headerBody">
+          <Search hideButtons inputValue={term?.term} />
 
-      <nav className="sP_options">
-        <div className="sP_optionsLeft">
-          {searchPageOptionsLeft.map((label, idx) => (
-            <div
-              className={`sP_option ${activeLabel === label ? "active" : ""
-                }`}
-              key={idx}
-              onClick={() => setActiveLabel(label)}
-            >
-              <Link
-                to={label === "All" ? "/search" : `/${label.toLowerCase()}`}
-              >
-                {label}
-              </Link>
-            </div>
-          ))}
-
-          <div className="sP_option_dropdown">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setShow(!show);
-              }}
-              className="sP_option_dropdown_btn"
-            >
-              <MoreVertIcon className="moreVertIcon" />
-              <div>More</div>
-            </button>
-
-            {show && <Dropdown show={show} items={searchPageMore} />}
-          </div>
-        </div>
-
-        <div className="sP_optionsRight">
-          {searchPageOptionsRight.map((label, idx) => (
-            <div className="sP_option" key={idx}>
-              <Link to={`/${label.toLowerCase()}`}>{label}</Link>
-            </div>
-          ))}
-        </div>
-      </nav>
-    </div>
-  </header>
-
-    {term?.term && (
-      <div className="results">
-        {loading ? (
-          <>
-            {[...Array(6)].map((_, i) => (
-              <ResultSkeleton key={i} />
-            ))}
-          </>
-        ) : data?.items?.length ? (
-          <>
-            <p className="resultsInfo">
-              About {data?.searchInformation?.formattedTotalResults} results
-              ({data?.searchInformation?.formattedSearchTime} seconds)
-            </p>
-
-            {data.items.map((item) => (
-              <div className="resultRow" key={item.link}>
-                <div className="result">
-                  <SiteInfo url={item.link} />
-
-                  <a
-                    className="resultTitle"
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+          <nav className="sP_options">
+            <div className="sP_optionsLeft">
+              {searchPageOptionsLeft.map((label, idx) => (
+                <div
+                  className={`sP_option ${activeLabel === label ? "active" : ""
+                    }`}
+                  key={idx}
+                  onClick={() => setActiveLabel(label)}
+                >
+                  <Link
+                    to={label === "All" ? "/search" : `/${label.toLowerCase()}`}
                   >
-                    {highlightText(item.title, debouncedTerm)}
-                  </a>
-
-                  <p className="resultSnippet">
-                    {highlightText(item.snippet, debouncedTerm)}
-                  </p>
+                    {label}
+                  </Link>
                 </div>
+              ))}
 
-                {item?.pagemap?.cse_image?.[0]?.src && (
-                  <img
-                    className="resultThumbnail"
-                    src={item.pagemap.cse_image[0].src}
-                    alt="Thumbnail"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = getFavicon(item.link);
-                    }}
-                  />
-                )}
+              <div className="sP_option_dropdown">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShow(!show);
+                  }}
+                  className="sP_option_dropdown_btn"
+                >
+                  <MoreVertIcon className="moreVertIcon" />
+                  <div>More</div>
+                </button>
+
+                {show && <Dropdown show={show} items={searchPageMore} />}
               </div>
-            ))}
-          </>
-        ) : (
-          <p className="noResults">No results found.</p>
-        )}
-      </div>
-    )}
-  </div>
+            </div>
 
+            <div className="sP_optionsRight">
+              {searchPageOptionsRight.map((label, idx) => (
+                <div className="sP_option" key={idx}>
+                  <Link to={`/${label.toLowerCase()}`}>{label}</Link>
+                </div>
+              ))}
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      {/* 🔹 Results */}
+      {term?.term && (
+        <div className="results">
+          {loading ? (
+            <>
+              {[...Array(6)].map((_, i) => (
+                <ResultSkeleton key={i} />
+              ))}
+            </>
+          ) : data?.items?.length ? (
+            <>
+              <p className="resultsInfo">
+                About {data?.searchInformation?.formattedTotalResults} results (
+                {data?.searchInformation?.formattedSearchTime} seconds)
+              </p>
+
+              {data.items.map((item) => (
+                <div className="resultRow" key={item.link}>
+                  {/* 🔹 Text Section */}
+                  <div className="result">
+                    <SiteInfo url={item.link} />
+
+                    <div className="resultContent">
+                      <a
+                        className="resultTitle"
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {highlightText(item.title, debouncedTerm)}
+                      </a>
+
+                      <p className="resultSnippet">
+                        {highlightText(item.snippet, debouncedTerm)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 🔹 Thumbnail */}
+                  {item?.pagemap?.cse_image?.[0]?.src && (
+                    <img
+                      className="resultThumbnail"
+                      src={item.pagemap.cse_image[0].src}
+                      alt="Thumbnail"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = getFavicon(item.link);
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
+            </>
+          ) : (
+            <p className="noResults">No results found.</p>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 

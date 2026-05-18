@@ -1,3 +1,10 @@
+.search_wrapper {
+  position: relative;
+  width: 75vw;
+  max-width: 560px;
+  margin: 40px auto 0;
+}
+
 .search_data {
   display: flex;
   align-items: center;
@@ -5,10 +12,7 @@
   box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
   padding: 10px 20px;
   border-radius: 24px;
-  width: 75vw;
-  margin: 0 auto;
-  margin-top: 40px;
-  max-width: 560px;
+  background-color: white;
 }
 
 .search_data:hover {
@@ -17,14 +21,47 @@
   border-color: transparent;
 }
 
-.search_data > input {
+.search_wrapper .search_data {
+  width: 100%;
+  margin-top: 0;
+}
+
+.search_data>input {
   flex: 1;
   font-size: medium;
   border: none;
+  background: transparent;
 }
 
-.search_data > input:focus {
+.search_data>input:focus {
   outline-width: 0;
+}
+
+.suggestions {
+  width: calc(100% + 40px);
+  background: white;
+  margin-top: 8px;
+  border-radius: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.suggestionItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.suggestionItem:hover {
+  background-color: #f1f3f4;
+}
+
+.suggestionIcon {
+  color: #9aa0a6;
+  font-size: 20px !important;
 }
 
 .buttons {
@@ -55,7 +92,7 @@
 }
 
 .buttons .addIcon {
-  border: 1px solid c6c6c6;
+  border: 1px solid #c6c6c6;
   border-radius: 50%;
   padding: 10px;
   color: black;

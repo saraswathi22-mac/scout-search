@@ -20,8 +20,11 @@ import CloseIcon from "@mui/icons-material/Close";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
-  const [input, setInput] = useState("" || inputValue);
+  const [input, setInput] = useState(inputValue || "");
   const [open, setOpen] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const openModal = () => {
     setOpen(true);
@@ -33,10 +36,44 @@ function Search({ hideButtons, inputValue }) {
 
   const navigate = useNavigate();
 
+  const recentSearches =
+    JSON.parse(localStorage.getItem("recentSearches")) || [];
+
+  const handleSuggestions = (value) => {
+    setInput(value);
+
+    if (!value.trim()) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    const filteredSuggestions = recentSearches.filter((item) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setSuggestions(filteredSuggestions);
+    setShowSuggestions(true);
+    setSelectedIndex(-1);
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     const trimmedInput = input.trim();
     if (!trimmedInput) return;
+
+    const updatedSearches = [
+      trimmedInput,
+      ...recentSearches.filter(
+        (item) => item.toLowerCase() !== trimmedInput.toLowerCase()
+      ),
+    ].slice(0, 5);
+    console.log("Searching:", trimmedInput);
+    localStorage.setItem(
+      "recentSearches",
+      JSON.stringify(updatedSearches)
+    );
+
     dispatch({
       type: actionTypes.SET_SEARCH_TERM,
       term: trimmedInput || inputValue,
@@ -46,10 +83,32 @@ function Search({ hideButtons, inputValue }) {
 
   return (
     <form className="search" onSubmit={handleSearch}>
-      <div className="search_data">
-        <SearchIcon className="searchIcon" />
-        <input value={input} onChange={(e) => setInput(e.target.value)} />
-        <MicIcon />
+      <div className="search_wrapper">
+        <div className="search_data">
+          <SearchIcon className="searchIcon" />
+          <input
+            value={input}
+            onChange={(e) => handleSuggestions(e.target.value)}
+          />
+          <MicIcon />
+        </div>
+        {showSuggestions && suggestions.length > 0 && (
+          <div className="suggestions">
+            {suggestions.map((item) => (
+              <div
+                key={item}
+                className="suggestionItem"
+                onClick={() => {
+                  setInput(item);
+                  setShowSuggestions(false);
+                }}
+              >
+                <SearchIcon className="suggestionIcon" />
+                {item}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       {!hideButtons ? (
         <div className="buttons shortcuts">

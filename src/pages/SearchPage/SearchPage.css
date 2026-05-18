@@ -20,10 +20,15 @@
   flex: 1;
 }
 
-.sP_headerBody > .search > .search_data {
-  margin-top: 0;
+.sP_headerBody>.search>.search_wrapper {
+  width: 100%;
+  max-width: unset;
+  margin: 0;
+}
+
+.sP_headerBody>.search>.search_wrapper>.search_data {
   width: 55%;
-  margin: unset;
+  margin: 0;
   max-width: unset;
 }
 
@@ -83,7 +88,7 @@
   align-items: center;
 }
 
-.sP_option_dropdown_btn > div {
+.sP_option_dropdown_btn>div {
   display: inline-block;
 }
 

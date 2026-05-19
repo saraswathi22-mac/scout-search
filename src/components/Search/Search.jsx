@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Search.css";
 import MicIcon from "@mui/icons-material/Mic";
 import SearchIcon from "@mui/icons-material/Search";
@@ -17,6 +17,7 @@ import { useStateValue } from "../../context/StateProvider";
 import { actionTypes } from "../../reducer/reducer";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import useVoiceSearch from "../../hooks/useVoiceSearch";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
@@ -36,8 +37,20 @@ function Search({ hideButtons, inputValue }) {
 
   const navigate = useNavigate();
 
+  const {
+    transcript,
+    isListening,
+    startListening,
+  } = useVoiceSearch();
+
   const recentSearches =
     JSON.parse(localStorage.getItem("recentSearches")) || [];
+
+  useEffect(() => {
+    if (transcript) {
+      setInput(transcript);
+    }
+  }, [transcript]);
 
   const handleSuggestions = (value) => {
     setInput(value);
@@ -68,7 +81,7 @@ function Search({ hideButtons, inputValue }) {
         (item) => item.toLowerCase() !== trimmedInput.toLowerCase()
       ),
     ].slice(0, 5);
-    console.log("Searching:", trimmedInput);
+
     localStorage.setItem(
       "recentSearches",
       JSON.stringify(updatedSearches)
@@ -90,7 +103,10 @@ function Search({ hideButtons, inputValue }) {
             value={input}
             onChange={(e) => handleSuggestions(e.target.value)}
           />
-          <MicIcon />
+          <MicIcon
+            onClick={startListening}
+            className={`micIcon ${isListening ? "listening" : ""}`}
+          />
         </div>
         {showSuggestions && suggestions.length > 0 && (
           <div className="suggestions">

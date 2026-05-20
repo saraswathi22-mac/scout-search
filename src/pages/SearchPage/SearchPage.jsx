@@ -24,6 +24,7 @@ function SearchPage() {
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");
   const [loading, setLoading] = useState(true);
+  const [showBorder, setShowBorder] = useState(false);
 
   const highlightText = (text, keyword) => {
     if (!text || !keyword) return text;
@@ -63,10 +64,22 @@ function SearchPage() {
     return () => window.removeEventListener("click", closeDropdown);
   }, []);
 
+  useEffect(() => {
+  const handleScroll = () => {
+    setShowBorder(window.scrollY > 10);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
   return (
     <div className="searchPage">
       {/* 🔹 Header */}
-      <header className="sP_header">
+      <header className={`sP_header ${showBorder ? "headerBorder" : ""}`}>
         <Link to="/">
           <img
             className="sP_logo"
@@ -77,50 +90,52 @@ function SearchPage() {
 
         <div className="sP_headerBody">
           <Search hideButtons inputValue={term?.term} />
-
-          <nav className="sP_options">
-            <div className="sP_optionsLeft">
-              {searchPageOptionsLeft.map((label, idx) => (
-                <div
-                  className={`sP_option ${activeLabel === label ? "active" : ""
-                    }`}
-                  key={idx}
-                  onClick={() => setActiveLabel(label)}
-                >
-                  <Link
-                    to={label === "All" ? "/search" : `/${label.toLowerCase()}`}
-                  >
-                    {label}
-                  </Link>
-                </div>
-              ))}
-
-              <div className="sP_option_dropdown">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShow(!show);
-                  }}
-                  className="sP_option_dropdown_btn"
-                >
-                  <MoreVertIcon className="moreVertIcon" />
-                  <div>More</div>
-                </button>
-
-                {show && <Dropdown show={show} items={searchPageMore} />}
-              </div>
-            </div>
-
-            <div className="sP_optionsRight">
-              {searchPageOptionsRight.map((label, idx) => (
-                <div className="sP_option" key={idx}>
-                  <Link to={`/${label.toLowerCase()}`}>{label}</Link>
-                </div>
-              ))}
-            </div>
-          </nav>
         </div>
       </header>
+
+      <div className={`sP_optionsWrapper ${showBorder ? "hideTabsBorder" : ""}`}>
+        <nav className="sP_options">
+          <div className="sP_optionsLeft">
+            {searchPageOptionsLeft.map((label, idx) => (
+              <div
+                className={`sP_option ${activeLabel === label ? "active" : ""
+                  }`}
+                key={idx}
+                onClick={() => setActiveLabel(label)}
+              >
+                <Link
+                  to={label === "All" ? "/search" : `/${label.toLowerCase()}`}
+                >
+                  {label}
+                </Link>
+              </div>
+            ))}
+
+            <div className="sP_option_dropdown">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShow(!show);
+                }}
+                className="sP_option_dropdown_btn"
+              >
+                <MoreVertIcon className="moreVertIcon" />
+                <div>More</div>
+              </button>
+
+              {show && <Dropdown show={show} items={searchPageMore} />}
+            </div>
+          </div>
+
+          <div className="sP_optionsRight">
+            {searchPageOptionsRight.map((label, idx) => (
+              <div className="sP_option" key={idx}>
+                <Link to={`/${label.toLowerCase()}`}>{label}</Link>
+              </div>
+            ))}
+          </div>
+        </nav>
+      </div>
 
       {/* 🔹 Results */}
       {term?.term && (

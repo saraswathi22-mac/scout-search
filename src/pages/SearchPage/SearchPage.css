@@ -27,7 +27,8 @@
 }
 
 .sP_headerBody>.search>.search_wrapper>.search_data {
-  width: 55%;
+  width: 680px;
+  max-width: 100%;
   margin: 0;
   max-width: unset;
 }
@@ -99,9 +100,11 @@
 /* RESULTS */
 
 .results {
-  max-width: 648px;
-  margin-left: 224px;
+  width: 100%;
+  max-width: 680px;
   margin-top: 20px;
+  margin-left: 220px;
+  padding-right: 20px;
 }
 
 .resultsInfo {
@@ -168,4 +171,12 @@
 .highlight {
   color: #1a0dab;
   font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .results {
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: unset;
+  }
 }

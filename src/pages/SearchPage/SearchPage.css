@@ -5,14 +5,18 @@
   background-color: #fff;
   z-index: 100;
   align-items: flex-start;
-  padding: 20px 30px;
-  /* border-bottom: 1px solid #e0e0e0; */
+  padding: 20px 30px 12px;
+  transition:
+    padding 0.2s ease,
+    box-shadow 0.2s ease;
+
 }
 
 .sP_logo {
   object-fit: contain;
   height: 30px;
   margin: 10px 30px;
+  transition: height 0.2s ease, margin 0.2s ease;
 }
 
 .sP_headerBody {
@@ -128,13 +132,16 @@
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 24px;
-  padding: 14px 0;
+  padding: 14px 4px;
   border-radius: 14px;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .resultRow:hover {
   background-color: #f8f9fa;
+  transform: translateY(-1px);
 }
 
 .result {
@@ -149,6 +156,7 @@
   line-height: 1.4;
   margin-top: 2px;
   transition: color 0.2s ease;
+  cursor: pointer;
 }
 
 .resultTitle:hover {
@@ -172,6 +180,12 @@
   border-radius: 10px;
   object-fit: cover;
   margin-top: 6px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.resultRow:hover .resultThumbnail {
+  transform: scale(1.03);
 }
 
 .noResults {
@@ -222,4 +236,12 @@
 
 .headerBorder {
   border-bottom: 1px solid #e0e0e0;
+}
+
+.sP_headerBody>.search>.search_wrapper>.search_data {
+  transition: height 0.2s ease, box-shadow 0.2s ease;
+}
+
+.headerBorder .search_data {
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.18);
 }

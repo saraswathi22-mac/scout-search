@@ -15,7 +15,8 @@
 .header a {
   text-decoration: none;
   color: #202124;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .header a:hover {
@@ -26,15 +27,18 @@
 .header__right {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
 /* Apps icon */
-  .header__right .MuiSvgIcon-root {
+.header__right .MuiSvgIcon-root {
   cursor: pointer;
   padding: 8px;
   border-radius: 50%;
-  transition: background 0.2s;
+  color: #5f6368;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .header__right .MuiSvgIcon-root:hover {
@@ -46,6 +50,16 @@
   width: 34px !important;
   height: 34px !important;
   cursor: pointer;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.header__avatar:hover {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.14);
+  transform: scale(1.02);
 }
 
 /* Body */
@@ -53,15 +67,17 @@
 .body {
   flex: 1;
   display: flex;
-  margin-top: 120px;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  transform: translateY(-4%);
 }
 
 .body img {
+  width: min(272px, 70vw);
+  height: auto;
   object-fit: contain;
-  height: 92px;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 /* Footer */
@@ -69,13 +85,14 @@
 .footer {
   background-color: #f2f2f2;
   font-size: 14px;
-  color: #1f1f1f;
+  color: #70757a;
   width: 100%;
 }
 
 .footer__region {
   padding: 15px 30px;
   border-bottom: 1px solid #dadce0;
+  color: #70757a;
 }
 
 .footer__links {
@@ -83,6 +100,7 @@
   justify-content: space-between;
   padding: 15px 30px;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
 .footer__left,
@@ -94,11 +112,48 @@
 
 .footer__left a,
 .footer__right a {
-  color: #1f1f1f;
+  color: #70757a;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .footer__left a:hover,
 .footer__right a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+
+  .header {
+    padding: 12px 14px;
+  }
+
+  .header__left,
+  .header__right {
+    gap: 12px;
+  }
+
+  .body {
+    transform: translateY(-2%);
+    padding: 0 20px;
+  }
+
+  .body img {
+    width: min(220px, 75vw);
+  }
+
+  .search_wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer__links {
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .footer__left,
+  .footer__right {
+    justify-content: center;
+  }
 }

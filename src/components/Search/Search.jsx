@@ -18,6 +18,8 @@ import { actionTypes } from "../../reducer/reducer";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
@@ -26,6 +28,10 @@ function Search({ hideButtons, inputValue }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+  const [shortcuts, setShortcuts] = useState([]);
+  const [editId, setEditId] = useState(null);
 
   const openModal = () => {
     setOpen(true);
@@ -50,6 +56,17 @@ function Search({ hideButtons, inputValue }) {
     if (transcript) {
       setInput(transcript);
     }
+  }, [transcript]);
+
+  useEffect(() => {
+    if (transcript) {
+      setInput(transcript);
+    }
+
+    const savedShortcuts =
+      JSON.parse(localStorage.getItem("shortcuts")) || [];
+
+    setShortcuts(savedShortcuts);
   }, [transcript]);
 
   const handleSuggestions = (value) => {
@@ -94,6 +111,70 @@ function Search({ hideButtons, inputValue }) {
     navigate("/search");
   };
 
+  const handleShortcut = () => {
+    if (!name.trim() || !url.trim()) return;
+
+    const formattedUrl = url.startsWith("http")
+      ? url
+      : `https://${url}`;
+
+    let updatedShortcuts;
+
+    if (editId) {
+      updatedShortcuts = shortcuts.map((item) =>
+        item.id === editId
+          ? {
+            ...item,
+            name,
+            url: formattedUrl,
+          }
+          : item
+      );
+    } else {
+      updatedShortcuts = [
+        ...shortcuts,
+        {
+          id: Date.now(),
+          name,
+          url: formattedUrl,
+        },
+      ];
+    }
+
+    setShortcuts(updatedShortcuts);
+
+    localStorage.setItem(
+      "shortcuts",
+      JSON.stringify(updatedShortcuts)
+    );
+
+    setName("");
+    setUrl("");
+    setEditId(null);
+
+    closeModal();
+  };
+
+  const handleDelete = (id) => {
+    const filteredShortcuts =
+      shortcuts.filter((item) => item.id !== id);
+
+    setShortcuts(filteredShortcuts);
+
+    localStorage.setItem(
+      "shortcuts",
+      JSON.stringify(filteredShortcuts)
+    );
+  };
+
+  const handleEdit = (item) => {
+    setName(item.name);
+    setUrl(item.url);
+    setEditId(item.id);
+
+    openModal();
+  };
+
   return (
     <form className="search" onSubmit={handleSearch}>
       <div className="search_wrapper">
@@ -128,10 +209,18 @@ function Search({ hideButtons, inputValue }) {
       </div>
       {!hideButtons ? (
         <div className="buttons shortcuts">
-          <Button variant="outlined" onClick={openModal}>
-            <AddIcon className="addIcon" />
-            <div className="addShortcuts">Add Shortcut</div>
-          </Button>
+          <div
+  className="shortcutCard addShortcutCard"
+  onClick={openModal}
+>
+  <div className="shortcutLogo addShortcutLogo">
+    <AddIcon sx={{ fontSize: 24 }} />
+  </div>
+
+  <div className="addShortcutText">
+    Add Shortcut
+  </div>
+</div>
           <Dialog open={open} onClose={closeModal} fullWidth>
             <DialogTitle>
               User{" "}
@@ -141,17 +230,63 @@ function Search({ hideButtons, inputValue }) {
             </DialogTitle>
             <DialogContent>
               <Stack spacing={2} margin={2}>
-                <TextField variant="outlined" label="Name"></TextField>
-                <TextField variant="outlined" label="URL"></TextField>
+                <TextField
+                  variant="outlined"
+                  label="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <TextField
+                  variant="outlined"
+                  label="URL"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                />
               </Stack>
             </DialogContent>
             <DialogActions>
               <Button onClick={closeModal} variant="outlined">
                 Cancel
               </Button>
-              <Button variant="contained">Done</Button>
+              <Button
+                variant="contained"
+                onClick={handleShortcut}
+              >
+                {editId ? "Update" : "Done"}
+              </Button>
             </DialogActions>
           </Dialog>
+          <div className="shortcutsContainer">
+            {shortcuts.map((item) => (
+              <div key={item.id} className="shortcutCard">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {item.name}
+                </a>
+
+                <div className="shortcutActions">
+                  <IconButton
+                    size="small"
+                    className="editBtn"
+                    onClick={() => handleEdit(item)}
+                  >
+                    <EditIcon sx={{ fontSize: 18 }} />
+                  </IconButton>
+
+                  <IconButton
+                    size="small"
+                    className="deleteBtn"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    <DeleteIcon sx={{ fontSize: 18 }} />
+                  </IconButton>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <Button variant="outlined" className="buttonsHidden">

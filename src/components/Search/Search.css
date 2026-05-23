@@ -73,43 +73,12 @@
   font-size: 20px !important;
 }
 
-.buttons {
-  margin-top: 30px;
+.buttons.shortcuts {
+  margin-top: 40px;
   display: flex;
   justify-content: center;
-}
-
-.buttons button {
-  margin: 5px;
-  padding: 15px;
-  background-color: #f8f8f8;
-  border: 1px solid white;
-  text-transform: inherit;
-  color: #5f6368;
-  display: block;
-  font-size: 0.75rem;
-}
-
-.buttons button:hover {
-  background-color: #5f6368;
-  border: 1px solid #c6c6c6;
-  color: white;
-}
-
-.buttonsHidden {
-  display: none !important;
-}
-
-.buttons .addIcon {
-  border: 1px solid #c6c6c6;
-  border-radius: 50%;
-  padding: 10px;
-  color: black;
-  background-color: #c6c6c6;
-}
-
-.buttons .addShortcuts {
-  padding-top: 10px;
+  flex-wrap: wrap;
+  gap: 22px;
 }
 
 .searchIcon {
@@ -125,4 +94,175 @@
   color: #4285f4;
   animation: pulse 1.2s infinite;
   transform: scale(1.15);
+}
+
+.shortcutsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.shortcutCard {
+  width: 128px;
+  height: 128px;
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(60, 64, 67, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.shortcutCard:hover {
+  transform: translateY(-4px);
+
+  background: rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.shortcutCard a {
+  text-decoration: none;
+  color: #202124;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-align: center;
+
+  width: 100%;
+
+  transition:
+    transform 0.25s ease;
+
+  position: relative;
+  z-index: 2;
+}
+
+.shortcutLogo {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+
+  background:
+    linear-gradient(145deg,
+      #f8f9fa,
+      #dfe1e5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  color: #202124;
+  text-transform: uppercase;
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.shortcutActions {
+  position: absolute;
+  bottom: 10px;
+
+  display: flex;
+  gap: 6px;
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+
+  z-index: 3;
+}
+
+.shortcutCard:hover .shortcutActions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shortcutActions .MuiIconButton-root {
+  padding: 4px !important;
+
+  background: transparent !important;
+
+  opacity: 0.75;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.shortcutCard:hover .MuiIconButton-root {
+  opacity: 0.7;
+  transform: translateY(0);
+}
+
+.shortcutActions .MuiIconButton-root:hover {
+  transform: scale(1.12);
+  opacity: 1;
+}
+
+.editBtn,
+.deleteBtn {
+  color: #5f6368 !important;
+}
+
+.addShortcutCard {
+  background-color: #f8f9fa;
+  border: 1px solid #dadce0;
+}
+
+.addShortcutCard:hover {
+  background-color: #ffffff;
+  border-color: #c6c6c6;
+}
+
+.addShortcutLogo {
+  background-color: #e8eaed;
+  color: #5f6368;
+}
+
+.addShortcutText {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #202124;
 }

@@ -2,16 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Search.css";
 import MicIcon from "@mui/icons-material/Mic";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { actionTypes } from "../../reducer/reducer";
@@ -20,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ShortcutDialog from "../ShortcutDialog/ShortcutDialog";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
@@ -210,52 +202,27 @@ function Search({ hideButtons, inputValue }) {
       {!hideButtons ? (
         <div className="buttons shortcuts">
           <div
-  className="shortcutCard addShortcutCard"
-  onClick={openModal}
->
-  <div className="shortcutLogo addShortcutLogo">
-    <AddIcon sx={{ fontSize: 24 }} />
-  </div>
+            className="shortcutCard addShortcutCard"
+            onClick={openModal}
+          >
+            <div className="shortcutLogo addShortcutLogo">
+              <AddIcon sx={{ fontSize: 24 }} />
+            </div>
 
-  <div className="addShortcutText">
-    Add Shortcut
-  </div>
-</div>
-          <Dialog open={open} onClose={closeModal} fullWidth>
-            <DialogTitle>
-              User{" "}
-              <IconButton onClick={closeModal} style={{ float: "right" }}>
-                <CloseIcon color="primary"></CloseIcon>
-              </IconButton>
-            </DialogTitle>
-            <DialogContent>
-              <Stack spacing={2} margin={2}>
-                <TextField
-                  variant="outlined"
-                  label="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <TextField
-                  variant="outlined"
-                  label="URL"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </Stack>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={closeModal} variant="outlined">
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                onClick={handleShortcut}
-              >
-                {editId ? "Update" : "Done"}
-              </Button>
-            </DialogActions>
-          </Dialog>
+            <div className="addShortcutText">
+              Add Shortcut
+            </div>
+          </div>
+          <ShortcutDialog
+            open={open}
+            closeModal={closeModal}
+            name={name}
+            setName={setName}
+            url={url}
+            setUrl={setUrl}
+            editId={editId}
+            handleShortcut={handleShortcut}
+          />
           <div className="shortcutsContainer">
             {shortcuts.map((item) => (
               <div key={item.id} className="shortcutCard">

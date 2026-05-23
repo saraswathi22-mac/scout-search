@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Button,
   Dialog,
@@ -11,6 +12,9 @@ import {
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
+import AddLinkIcon from "@mui/icons-material/AddLink";
+
+import "./ShortcutDialog.css";
 
 function ShortcutDialog({
   open,
@@ -23,40 +27,62 @@ function ShortcutDialog({
   handleShortcut,
 }) {
   return (
-    <Dialog open={open} onClose={closeModal} fullWidth>
-      <DialogTitle>
-        {editId ? "Edit Shortcut" : "Add Shortcut"}
+    <Dialog
+      open={open}
+      onClose={closeModal}
+      fullWidth
+      maxWidth="xs"
+      PaperProps={{
+        className: "shortcutDialogPaper",
+      }}
+    >
+      <DialogTitle className="shortcutDialogTitle">
+        <div className="shortcutDialogHeading">
+          <AddLinkIcon className="shortcutDialogIcon" />
+
+          {editId
+            ? "Edit Shortcut"
+            : "Add Shortcut"}
+        </div>
 
         <IconButton
           onClick={closeModal}
-          style={{ float: "right" }}
+          className="shortcutDialogClose"
         >
-          <CloseIcon color="primary" />
+          <CloseIcon />
         </IconButton>
       </DialogTitle>
 
       <DialogContent>
-        <Stack spacing={2} margin={2}>
+        <Stack spacing={2.5} marginTop={1}>
           <TextField
             variant="outlined"
-            label="Name"
+            label="Shortcut Name"
+            fullWidth
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) =>
+              setName(e.target.value)
+            }
+            className="shortcutInput"
           />
 
           <TextField
             variant="outlined"
-            label="URL"
+            label="Website URL"
+            fullWidth
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={(e) =>
+              setUrl(e.target.value)
+            }
+            className="shortcutInput"
           />
         </Stack>
       </DialogContent>
 
-      <DialogActions>
+      <DialogActions className="shortcutDialogActions">
         <Button
           onClick={closeModal}
-          variant="outlined"
+          className="cancelBtn"
         >
           Cancel
         </Button>
@@ -64,8 +90,9 @@ function ShortcutDialog({
         <Button
           variant="contained"
           onClick={handleShortcut}
+          className="saveBtn"
         >
-          {editId ? "Update" : "Done"}
+          {editId ? "Update" : "Save"}
         </Button>
       </DialogActions>
     </Dialog>

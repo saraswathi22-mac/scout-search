@@ -60,10 +60,6 @@
   transition: background-color 0.2s ease;
 }
 
-.suggestionItem:hover {
-  background-color: #f1f3f4;
-}
-
 .suggestionIcon {
   color: #9aa0a6;
   font-size: 20px !important;

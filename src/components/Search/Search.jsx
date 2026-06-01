@@ -216,6 +216,7 @@ function Search({ hideButtons, inputValue }) {
                 className={`suggestionItem ${
                   selectedIndex === index ? "activeSuggestion" : ""
                 }`}
+                onMouseEnter={() => setSelectedIndex(index)}
                 onClick={() => {
                   setInput(item);
                   setShowSuggestions(false);

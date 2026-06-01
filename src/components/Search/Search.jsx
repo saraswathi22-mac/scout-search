@@ -92,6 +92,23 @@ function Search({ hideButtons, inputValue }) {
       );
     }
 
+    if (e.key === "Enter" && selectedIndex >= 0) {
+      e.preventDefault();
+    
+      const selectedSuggestion = suggestions[selectedIndex];
+    
+      setInput(selectedSuggestion);
+      setShowSuggestions(false);
+      setSelectedIndex(-1);
+    
+      dispatch({
+        type: actionTypes.SET_SEARCH_TERM,
+        term: selectedSuggestion,
+      });
+    
+      navigate("/search");
+    }
+
     if (e.key === "Escape") {
       setShowSuggestions(false);
       setSelectedIndex(-1);

@@ -13,20 +13,16 @@
   padding: 10px 20px;
   border-radius: 24px;
   background-color: #fff;
-  transition:
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .search_data:hover {
-  box-shadow:
-    0 1px 6px rgba(32, 33, 36, 0.28);
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
   border-color: rgba(223, 225, 229, 0);
 }
 
 .search_data:focus-within {
-  box-shadow:
-    0 1px 6px rgba(32, 33, 36, 0.28);
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
   border-color: rgba(223, 225, 229, 0);
 }
 
@@ -35,14 +31,14 @@
   margin-top: 0;
 }
 
-.search_data>input {
+.search_data > input {
   flex: 1;
   font-size: medium;
   border: none;
   background: transparent;
 }
 
-.search_data>input:focus {
+.search_data > input:focus {
   outline-width: 0;
 }
 
@@ -124,15 +120,12 @@
   position: relative;
   overflow: hidden;
 
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
     background-color 0.25s ease;
 
   cursor: pointer;
 
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.06),
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06),
     inset 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
@@ -141,8 +134,7 @@
 
   background: rgba(255, 255, 255, 0.88);
 
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.12),
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12),
     inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
@@ -164,8 +156,7 @@
 
   width: 100%;
 
-  transition:
-    transform 0.25s ease;
+  transition: transform 0.25s ease;
 
   position: relative;
   z-index: 2;
@@ -176,10 +167,7 @@
   height: 46px;
   border-radius: 50%;
 
-  background:
-    linear-gradient(145deg,
-      #f8f9fa,
-      #dfe1e5);
+  background: linear-gradient(145deg, #f8f9fa, #dfe1e5);
 
   display: flex;
   justify-content: center;
@@ -191,8 +179,7 @@
   color: #202124;
   text-transform: uppercase;
 
-  box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8),
     0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
@@ -206,9 +193,7 @@
   opacity: 0;
   transform: translateY(10px);
 
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 
   z-index: 3;
 }
@@ -225,9 +210,7 @@
 
   opacity: 0.75;
 
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .shortcutCard:hover .MuiIconButton-root {
@@ -265,4 +248,8 @@
   font-size: 13px;
   font-weight: 500;
   color: #202124;
+}
+
+.activeSuggestion {
+  background: #f1f3f4;
 }

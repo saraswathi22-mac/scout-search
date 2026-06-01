@@ -62,6 +62,7 @@ function Search({ hideButtons, inputValue }) {
     if (!value.trim()) {
       setSuggestions([]);
       setShowSuggestions(false);
+      setSelectedIndex(-1);
       return;
     }
 
@@ -72,6 +73,31 @@ function Search({ hideButtons, inputValue }) {
     setSuggestions(filteredSuggestions);
     setShowSuggestions(true);
     setSelectedIndex(-1);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+
+      setSelectedIndex((prev) =>
+        prev < suggestions.length - 1 ? prev + 1 : 0
+      );
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+
+      setSelectedIndex((prev) =>
+        prev > 0 ? prev - 1 : suggestions.length - 1
+      );
+    }
+
+    if (e.key === "Escape") {
+      setShowSuggestions(false);
+      setSelectedIndex(-1);
+    }
+
+    if (!suggestions.length) return;
   };
 
   const handleSearch = (e) => {
@@ -158,6 +184,7 @@ function Search({ hideButtons, inputValue }) {
           <input
             value={input}
             onChange={(e) => handleSuggestions(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <MicIcon
             onClick={startListening}
@@ -166,13 +193,16 @@ function Search({ hideButtons, inputValue }) {
         </div>
         {showSuggestions && suggestions.length > 0 && (
           <div className="suggestions">
-            {suggestions.map((item) => (
+            {suggestions.map((item, index) => (
               <div
                 key={item}
-                className="suggestionItem"
+                className={`suggestionItem ${
+                  selectedIndex === index ? "activeSuggestion" : ""
+                }`}
                 onClick={() => {
                   setInput(item);
                   setShowSuggestions(false);
+                  setSelectedIndex(-1);
                 }}
               >
                 <SearchIcon className="suggestionIcon" />
@@ -229,7 +259,7 @@ function Search({ hideButtons, inputValue }) {
             ))}
           </div>
         </div>
-      ) : null }
+      ) : null}
     </form>
   );
 }

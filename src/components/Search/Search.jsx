@@ -35,11 +35,7 @@ function Search({ hideButtons, inputValue }) {
 
   const navigate = useNavigate();
 
-  const {
-    transcript,
-    isListening,
-    startListening,
-  } = useVoiceSearch();
+  const { transcript, isListening, startListening } = useVoiceSearch();
 
   const recentSearches =
     JSON.parse(localStorage.getItem("recentSearches")) || [];
@@ -55,8 +51,7 @@ function Search({ hideButtons, inputValue }) {
       setInput(transcript);
     }
 
-    const savedShortcuts =
-      JSON.parse(localStorage.getItem("shortcuts")) || [];
+    const savedShortcuts = JSON.parse(localStorage.getItem("shortcuts")) || [];
 
     setShortcuts(savedShortcuts);
   }, [transcript]);
@@ -91,10 +86,7 @@ function Search({ hideButtons, inputValue }) {
       ),
     ].slice(0, 5);
 
-    localStorage.setItem(
-      "recentSearches",
-      JSON.stringify(updatedSearches)
-    );
+    localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
 
     dispatch({
       type: actionTypes.SET_SEARCH_TERM,
@@ -106,9 +98,7 @@ function Search({ hideButtons, inputValue }) {
   const handleShortcut = () => {
     if (!name.trim() || !url.trim()) return;
 
-    const formattedUrl = url.startsWith("http")
-      ? url
-      : `https://${url}`;
+    const formattedUrl = url.startsWith("http") ? url : `https://${url}`;
 
     let updatedShortcuts;
 
@@ -116,10 +106,10 @@ function Search({ hideButtons, inputValue }) {
       updatedShortcuts = shortcuts.map((item) =>
         item.id === editId
           ? {
-            ...item,
-            name,
-            url: formattedUrl,
-          }
+              ...item,
+              name,
+              url: formattedUrl,
+            }
           : item
       );
     } else {
@@ -135,10 +125,7 @@ function Search({ hideButtons, inputValue }) {
 
     setShortcuts(updatedShortcuts);
 
-    localStorage.setItem(
-      "shortcuts",
-      JSON.stringify(updatedShortcuts)
-    );
+    localStorage.setItem("shortcuts", JSON.stringify(updatedShortcuts));
 
     setName("");
     setUrl("");
@@ -148,15 +135,11 @@ function Search({ hideButtons, inputValue }) {
   };
 
   const handleDelete = (id) => {
-    const filteredShortcuts =
-      shortcuts.filter((item) => item.id !== id);
+    const filteredShortcuts = shortcuts.filter((item) => item.id !== id);
 
     setShortcuts(filteredShortcuts);
 
-    localStorage.setItem(
-      "shortcuts",
-      JSON.stringify(filteredShortcuts)
-    );
+    localStorage.setItem("shortcuts", JSON.stringify(filteredShortcuts));
   };
 
   const handleEdit = (item) => {
@@ -201,17 +184,12 @@ function Search({ hideButtons, inputValue }) {
       </div>
       {!hideButtons ? (
         <div className="buttons shortcuts">
-          <div
-            className="shortcutCard addShortcutCard"
-            onClick={openModal}
-          >
+          <div className="shortcutCard addShortcutCard" onClick={openModal}>
             <div className="shortcutLogo addShortcutLogo">
               <AddIcon sx={{ fontSize: 24 }} />
             </div>
 
-            <div className="addShortcutText">
-              Add Shortcut
-            </div>
+            <div className="addShortcutText">Add Shortcut</div>
           </div>
           <ShortcutDialog
             open={open}
@@ -226,11 +204,7 @@ function Search({ hideButtons, inputValue }) {
           <div className="shortcutsContainer">
             {shortcuts.map((item) => (
               <div key={item.id} className="shortcutCard">
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={item.url} target="_blank" rel="noreferrer">
                   {item.name}
                 </a>
 
@@ -255,11 +229,7 @@ function Search({ hideButtons, inputValue }) {
             ))}
           </div>
         </div>
-      ) : (
-        <Button variant="outlined" className="buttonsHidden">
-          Add Shortcut
-        </Button>
-      )}
+      ) : null }
     </form>
   );
 }

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Search.css";
 import MicIcon from "@mui/icons-material/Mic";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { actionTypes } from "../../reducer/reducer";
 import AddIcon from "@mui/icons-material/Add";
-import CloseIcon from "@mui/icons-material/Close";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -24,6 +23,8 @@ function Search({ hideButtons, inputValue }) {
   const [url, setUrl] = useState("");
   const [shortcuts, setShortcuts] = useState([]);
   const [editId, setEditId] = useState(null);
+
+  const searchRef = useRef(null);
 
   const openModal = () => {
     setOpen(true);
@@ -55,6 +56,21 @@ function Search({ hideButtons, inputValue }) {
 
     setShortcuts(savedShortcuts);
   }, [transcript]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+        setSelectedIndex(-1);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleSuggestions = (value) => {
     setInput(value);
@@ -94,18 +110,18 @@ function Search({ hideButtons, inputValue }) {
 
     if (e.key === "Enter" && selectedIndex >= 0) {
       e.preventDefault();
-    
+
       const selectedSuggestion = suggestions[selectedIndex];
-    
+
       setInput(selectedSuggestion);
       setShowSuggestions(false);
       setSelectedIndex(-1);
-    
+
       dispatch({
         type: actionTypes.SET_SEARCH_TERM,
         term: selectedSuggestion,
       });
-    
+
       navigate("/search");
     }
 
@@ -195,7 +211,7 @@ function Search({ hideButtons, inputValue }) {
 
   return (
     <form className="search" onSubmit={handleSearch}>
-      <div className="search_wrapper">
+      <div className="search_wrapper" ref={searchRef}>
         <div className="search_data">
           <SearchIcon className="searchIcon" />
           <input

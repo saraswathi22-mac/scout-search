@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Search.css";
-import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import AddIcon from "@mui/icons-material/Add";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ShortcutDialog from "../ShortcutDialog/ShortcutDialog";
 import { actionTypes } from "../../reducer/searchReducer.js";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
+import ShortcutCard from "./ShortcutCard";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
@@ -250,31 +248,14 @@ function Search({ hideButtons, inputValue }) {
             handleShortcut={handleShortcut}
           />
           <div className="shortcutsContainer">
-            {shortcuts.map((item) => (
-              <div key={item.id} className="shortcutCard">
-                <a href={item.url} target="_blank" rel="noreferrer">
-                  {item.name}
-                </a>
-
-                <div className="shortcutActions">
-                  <IconButton
-                    size="small"
-                    className="editBtn"
-                    onClick={() => handleEdit(item)}
-                  >
-                    <EditIcon sx={{ fontSize: 18 }} />
-                  </IconButton>
-
-                  <IconButton
-                    size="small"
-                    className="deleteBtn"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    <DeleteIcon sx={{ fontSize: 18 }} />
-                  </IconButton>
-                </div>
-              </div>
-            ))}
+          {shortcuts.map((item) => (
+  <ShortcutCard
+    key={item.id}
+    item={item}
+    handleEdit={handleEdit}
+    handleDelete={handleDelete}
+  />
+))}
           </div>
         </div>
       ) : null}

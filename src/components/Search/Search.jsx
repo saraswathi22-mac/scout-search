@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Search.css";
-import MicIcon from "@mui/icons-material/Mic";
-import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
@@ -12,6 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShortcutDialog from "../ShortcutDialog/ShortcutDialog";
 import { actionTypes } from "../../reducer/searchReducer.js";
+import SearchInput from "./SearchInput";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
@@ -38,6 +37,7 @@ function Search({ hideButtons, inputValue }) {
   const navigate = useNavigate();
 
   const { transcript, isListening, startListening } = useVoiceSearch();
+  console.log("isListening", transcript);
 
   const recentSearches =
     JSON.parse(localStorage.getItem("recentSearches")) || [];
@@ -213,18 +213,13 @@ function Search({ hideButtons, inputValue }) {
   return (
     <form className="search" onSubmit={handleSearch}>
       <div className="search_wrapper" ref={searchRef}>
-        <div className="search_data">
-          <SearchIcon className="searchIcon" />
-          <input
-            value={input}
-            onChange={(e) => handleSuggestions(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <MicIcon
-            onClick={startListening}
-            className={`micIcon ${isListening ? "listening" : ""}`}
-          />
-        </div>
+        <SearchInput
+          input={input}
+          handleSuggestions={handleSuggestions}
+          handleKeyDown={handleKeyDown}
+          startListening={startListening}
+          isListening={isListening}
+        />
         {showSuggestions && suggestions.length > 0 && (
           <div className="suggestions">
             {suggestions.map((item, index) => (

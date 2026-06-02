@@ -3,7 +3,6 @@ import "./Search.css";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
-// import { actionTypes } from "../../reducer/searchReducer.js";
 import AddIcon from "@mui/icons-material/Add";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
 import EditIcon from "@mui/icons-material/Edit";
@@ -11,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ShortcutDialog from "../ShortcutDialog/ShortcutDialog";
 import { actionTypes } from "../../reducer/searchReducer.js";
 import SearchInput from "./SearchInput";
+import SearchSuggestions from "./SearchSuggestions";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
@@ -221,25 +221,13 @@ function Search({ hideButtons, inputValue }) {
           isListening={isListening}
         />
         {showSuggestions && suggestions.length > 0 && (
-          <div className="suggestions">
-            {suggestions.map((item, index) => (
-              <div
-                key={item}
-                className={`suggestionItem ${
-                  selectedIndex === index ? "activeSuggestion" : ""
-                }`}
-                onMouseEnter={() => setSelectedIndex(index)}
-                onClick={() => {
-                  setInput(item);
-                  setShowSuggestions(false);
-                  setSelectedIndex(-1);
-                }}
-              >
-                <SearchIcon className="suggestionIcon" />
-                {item}
-              </div>
-            ))}
-          </div>
+          <SearchSuggestions
+            suggestions={suggestions}
+            selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex}
+            setInput={setInput}
+            setShowSuggestions={setShowSuggestions}
+          />
         )}
       </div>
       {!hideButtons ? (

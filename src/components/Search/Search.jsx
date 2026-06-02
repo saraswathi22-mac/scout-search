@@ -2,13 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Search.css";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
-import AddIcon from "@mui/icons-material/Add";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
-import ShortcutDialog from "../ShortcutDialog/ShortcutDialog";
 import { actionTypes } from "../../reducer/searchReducer.js";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
-import ShortcutCard from "./ShortcutCard";
+import SearchShortcuts from "./SearchShortcuts";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();
@@ -230,15 +228,9 @@ function Search({ hideButtons, inputValue }) {
       </div>
       {!hideButtons ? (
         <div className="buttons shortcuts">
-          <div className="shortcutCard addShortcutCard" onClick={openModal}>
-            <div className="shortcutLogo addShortcutLogo">
-              <AddIcon sx={{ fontSize: 24 }} />
-            </div>
-
-            <div className="addShortcutText">Add Shortcut</div>
-          </div>
-          <ShortcutDialog
+          <SearchShortcuts
             open={open}
+            openModal={openModal}
             closeModal={closeModal}
             name={name}
             setName={setName}
@@ -246,17 +238,10 @@ function Search({ hideButtons, inputValue }) {
             setUrl={setUrl}
             editId={editId}
             handleShortcut={handleShortcut}
+            shortcuts={shortcuts}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
           />
-          <div className="shortcutsContainer">
-          {shortcuts.map((item) => (
-  <ShortcutCard
-    key={item.id}
-    item={item}
-    handleEdit={handleEdit}
-    handleDelete={handleDelete}
-  />
-))}
-          </div>
         </div>
       ) : null}
     </form>

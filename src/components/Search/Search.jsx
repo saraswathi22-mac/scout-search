@@ -5,12 +5,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
-import { actionTypes } from "../../reducer/reducer";
+// import { actionTypes } from "../../reducer/searchReducer.js";
 import AddIcon from "@mui/icons-material/Add";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShortcutDialog from "../ShortcutDialog/ShortcutDialog";
+import { actionTypes } from "../../reducer/searchReducer.js";
 
 function Search({ hideButtons, inputValue }) {
   const { term, dispatch } = useStateValue();

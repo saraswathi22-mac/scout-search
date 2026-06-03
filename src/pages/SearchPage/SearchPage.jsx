@@ -19,11 +19,10 @@ import ResultSkeleton from "../../components/ResultSkeleton/ResultSkeleton";
 function SearchPage() {
   const { term } = useStateValue();
   const debouncedTerm = useDebounce(term?.term, 500);
-  const { data } = useGoogleSearch(debouncedTerm);
+  const { data, loading, error } = useGoogleSearch(debouncedTerm);
 
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");
-  const [loading, setLoading] = useState(true);
   const [showBorder, setShowBorder] = useState(false);
 
   const highlightText = (text, keyword) => {
@@ -49,14 +48,6 @@ function SearchPage() {
       )
     );
   };
-
-  useEffect(() => {
-    setLoading(true);
-  }, [debouncedTerm]);
-
-  useEffect(() => {
-    if (data) setLoading(false);
-  }, [data]);
 
   useEffect(() => {
     const closeDropdown = () => setShow(false);

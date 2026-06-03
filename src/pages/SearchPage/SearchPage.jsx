@@ -37,9 +37,7 @@ function SearchPage() {
     const regex = new RegExp(`(${escapedWords.join("|")})`, "gi");
 
     return text.split(regex).map((part, index) =>
-      escapedWords.some(
-        (word) => word.toLowerCase() === part.toLowerCase()
-      ) ? (
+      escapedWords.some((word) => word.toLowerCase() === part.toLowerCase()) ? (
         <span key={index} className="highlight">
           {part}
         </span>
@@ -56,16 +54,16 @@ function SearchPage() {
   }, []);
 
   useEffect(() => {
-  const handleScroll = () => {
-    setShowBorder(window.scrollY > 10);
-  };
+    const handleScroll = () => {
+      setShowBorder(window.scrollY > 10);
+    };
 
-  window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="searchPage">
@@ -84,14 +82,15 @@ function SearchPage() {
         </div>
       </header>
 
-      <div className={`sP_optionsWrapper ${showBorder ? "hideTabsBorder" : ""}`}>
+      <div
+        className={`sP_optionsWrapper ${showBorder ? "hideTabsBorder" : ""}`}
+      >
         <nav className="sP_options">
           <div className="sP_optionsLeft">
-            {searchPageOptionsLeft.map((label, idx) => (
+            {searchPageOptionsLeft.map((label) => (
               <div
-                className={`sP_option ${activeLabel === label ? "active" : ""
-                  }`}
-                key={idx}
+                className={`sP_option ${activeLabel === label ? "active" : ""}`}
+                key={label}
                 onClick={() => setActiveLabel(label)}
               >
                 <Link
@@ -119,8 +118,8 @@ function SearchPage() {
           </div>
 
           <div className="sP_optionsRight">
-            {searchPageOptionsRight.map((label, idx) => (
-              <div className="sP_option" key={idx}>
+            {searchPageOptionsRight.map((label) => (
+              <div className="sP_option" key={label}>
                 <Link to={`/${label.toLowerCase()}`}>{label}</Link>
               </div>
             ))}

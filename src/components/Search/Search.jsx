@@ -33,7 +33,6 @@ function Search({ hideButtons, inputValue }) {
   const navigate = useNavigate();
 
   const { transcript, isListening, startListening } = useVoiceSearch();
-  console.log("isListening", transcript);
 
   const recentSearches =
     JSON.parse(localStorage.getItem("recentSearches")) || [];

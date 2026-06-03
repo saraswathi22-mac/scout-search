@@ -3,7 +3,7 @@ import "./Search.css";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import useVoiceSearch from "../../hooks/useVoiceSearch";
-import { actionTypes } from "../../reducer/searchReducer.js";
+import { actionTypes } from "../../reducer/searchReducer";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 import SearchShortcuts from "./SearchShortcuts";

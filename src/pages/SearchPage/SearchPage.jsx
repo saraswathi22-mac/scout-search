@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search";
 import "./SearchPage.css";
 import { useStateValue } from "../../context/StateProvider";
-import { useGoogleSearch } from "../../services/useGoogleSearch";
+import { useGoogleSearch } from "../../hooks/useGoogleSearch";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Dropdown from "../../components/DropDown/Dropdown";
 import {

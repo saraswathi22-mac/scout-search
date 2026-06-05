@@ -37,21 +37,25 @@ function Search({ hideButtons, inputValue }) {
   const recentSearches =
     JSON.parse(localStorage.getItem("recentSearches")) || [];
 
-  useEffect(() => {
-    if (transcript) {
+    useEffect(() => {
+      if (!transcript) return;
+    
       setInput(transcript);
-    }
-  }, [transcript]);
+    
+      dispatch({
+        type: actionTypes.SET_SEARCH_TERM,
+        term: transcript,
+      });
+    
+      navigate("/search");
+    }, [transcript, dispatch, navigate]);
 
-  useEffect(() => {
-    if (transcript) {
-      setInput(transcript);
-    }
-
-    const savedShortcuts = JSON.parse(localStorage.getItem("shortcuts")) || [];
-
-    setShortcuts(savedShortcuts);
-  }, [transcript]);
+    useEffect(() => {
+      const savedShortcuts =
+        JSON.parse(localStorage.getItem("shortcuts")) || [];
+    
+      setShortcuts(savedShortcuts);
+    }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

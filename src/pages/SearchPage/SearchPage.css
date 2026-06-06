@@ -6,10 +6,7 @@
   z-index: 100;
   align-items: flex-start;
   padding: 20px 30px 12px;
-  transition:
-    padding 0.2s ease,
-    box-shadow 0.2s ease;
-
+  transition: padding 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sP_logo {
@@ -24,13 +21,13 @@
   flex: 1;
 }
 
-.sP_headerBody>.search>.search_wrapper {
+.sP_headerBody > .search > .search_wrapper {
   width: 100%;
   max-width: unset;
   margin: 0;
 }
 
-.sP_headerBody>.search>.search_wrapper>.search_data {
+.sP_headerBody > .search > .search_wrapper > .search_data {
   width: 680px;
   max-width: 100%;
   margin: 0;
@@ -50,11 +47,11 @@
   align-items: center;
   padding: 14px 30px 12px;
   margin-left: 175px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   background-color: #fff;
   color: #70757a;
   font-size: 14px;
-   gap: clamp(2rem, 6vw, 6rem);
+  gap: clamp(2rem, 6vw, 6rem);
 }
 
 .sP_optionsLeft,
@@ -98,7 +95,7 @@
   align-items: center;
 }
 
-.sP_option_dropdown_btn>div {
+.sP_option_dropdown_btn > div {
   display: inline-block;
 }
 
@@ -126,12 +123,10 @@
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   padding: 14px 4px;
   border-radius: 14px;
-  transition:
-    background-color 0.2s ease,
-    transform 0.15s ease;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .resultRow:hover {
@@ -173,8 +168,8 @@
 }
 
 .resultThumbnail {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   border-radius: 10px;
   object-fit: cover;
   margin-top: 18px;
@@ -182,7 +177,7 @@
   cursor: pointer;
   image-rendering: auto;
   flex-shrink: 0;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .resultRow:hover .resultThumbnail {
@@ -208,26 +203,132 @@
 /* MOBILE */
 
 @media (max-width: 768px) {
-
+  /* HEADER */
   .sP_header {
-    padding: 16px;
+    padding: 12px 16px;
+    align-items: center;
   }
+
+  .sP_logo {
+    display: none;
+  }
+
+  .sP_headerBody {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sP_headerBody > .search > .search_wrapper {
+    width: 100%;
+  }
+
+  .sP_headerBody > .search > .search_wrapper > .search_data {
+    width: auto;
+    box-sizing: border-box;
+  }
+
+  /* TABS */
 
   .sP_options {
-    top: 72px;
-    padding-left: 20px;
-    gap: 2rem;
-    overflow-x: auto;
+    margin-left: 0;
+    padding: 10px 16px;
+    gap: 0;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    white-space: nowrap;
   }
 
+  .sP_optionsLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    scroll-behavior: smooth;
+  }
+
+  .sP_optionsLeft::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sP_optionsRight {
+    display: none;
+  }
+
+  .sP_option,
+  .sP_option_dropdown {
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+
+  /* RESULTS */
+
   .results {
-    margin-left: 20px;
-    margin-right: 20px;
-    max-width: unset;
+    margin: 16px 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .resultsInfo {
+    font-size: 12px;
+  }
+
+  .resultRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 92px;
+    align-items: start;
+    gap: 12px;
+  }
+
+  .resultTitle {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .resultContent {
+    width: 100%;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  .resultThumbnail {
+    width: 92px;
+    height: 92px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-top: 0;
+  }
+
+  .result {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .resultTitle,
+  .resultSnippet {
+    overflow-wrap: break-word;
+  }
+
+  .resultTitle {
+    overflow-wrap: anywhere;
+  }
+
+  .resultSnippet {
+    max-width: 100%;
   }
 }
 
 .sP_optionsWrapper {
+  position: sticky;
+  top: 68px;
+  z-index: 99;
+  background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -239,7 +340,7 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
-.sP_headerBody>.search>.search_wrapper>.search_data {
+.sP_headerBody > .search > .search_wrapper > .search_data {
   transition: height 0.2s ease, box-shadow 0.2s ease;
 }
 

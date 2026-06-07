@@ -5,16 +5,18 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Header */
+
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 12px 24px;
   align-items: center;
+  padding: 12px 24px;
 }
 
 .header a {
-  text-decoration: none;
   color: #202124;
+  text-decoration: none;
   font-size: 13px;
   font-weight: 400;
 }
@@ -30,29 +32,23 @@
   gap: 16px;
 }
 
-/* Apps icon */
 .header__right .MuiSvgIcon-root {
   cursor: pointer;
   padding: 8px;
   border-radius: 50%;
   color: #5f6368;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .header__right .MuiSvgIcon-root:hover {
   background-color: rgba(60, 64, 67, 0.08);
 }
 
-/* Avatar */
 .header__avatar {
   width: 34px !important;
   height: 34px !important;
   cursor: pointer;
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .header__avatar:hover {
@@ -62,7 +58,7 @@
   transform: scale(1.02);
 }
 
-/* Body */
+/* Main Content */
 
 .body {
   flex: 1;
@@ -70,44 +66,43 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: translateY(-4%);
+  
 }
 
 .body img {
   width: min(272px, 70vw);
   height: auto;
   object-fit: contain;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 /* Footer */
 
 .footer {
-  background-color: #f2f2f2;
-  font-size: 14px;
-  color: #70757a;
   width: 100%;
+  background-color: #f2f2f2;
+  color: #70757a;
+  font-size: 14px;
 }
 
 .footer__region {
   padding: 15px 30px;
   border-bottom: 1px solid #dadce0;
-  color: #70757a;
 }
 
 .footer__links {
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
   flex-wrap: wrap;
   gap: 12px;
+  padding: 15px 30px;
 }
 
 .footer__left,
 .footer__right {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
 .footer__left a,
@@ -122,8 +117,9 @@
   text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+/* Mobile */
 
+@media (max-width: 768px) {
   .header {
     padding: 12px 14px;
   }
@@ -134,17 +130,11 @@
   }
 
   .body {
-    transform: translateY(-2%);
-    padding: 0 20px;
+    padding: 0;
   }
 
   .body img {
     width: min(220px, 75vw);
-  }
-
-  .search_wrapper {
-    width: 100%;
-    max-width: 100%;
   }
 
   .footer__links {

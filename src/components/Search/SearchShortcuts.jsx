@@ -18,17 +18,28 @@ function SearchShortcuts({
 }) {
   return (
     <>
-      <div
-        className="shortcutCard addShortcutCard"
-        onClick={openModal}
-      >
-        <div className="shortcutLogo addShortcutLogo">
-          <AddIcon sx={{ fontSize: 24 }} />
+      <div className="shortcutsContainer">
+        <div
+          className="shortcutCard addShortcutCard"
+          onClick={openModal}
+        >
+          <div className="shortcutLogo addShortcutLogo">
+            <AddIcon sx={{ fontSize: 24 }} />
+          </div>
+
+          <div className="addShortcutText">
+            Add Shortcut
+          </div>
         </div>
 
-        <div className="addShortcutText">
-          Add Shortcut
-        </div>
+        {shortcuts.map((item) => (
+          <ShortcutCard
+            key={item.id}
+            item={item}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
+        ))}
       </div>
 
       <ShortcutDialog
@@ -41,17 +52,6 @@ function SearchShortcuts({
         editId={editId}
         handleShortcut={handleShortcut}
       />
-
-      <div className="shortcutsContainer">
-        {shortcuts.map((item) => (
-          <ShortcutCard
-            key={item.id}
-            item={item}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-          />
-        ))}
-      </div>
     </>
   );
 }

@@ -1,7 +1,6 @@
 .search_wrapper {
   position: relative;
-  width: 75vw;
-  max-width: 560px;
+  width: min(92vw, 584px);
   margin: 40px auto 0;
 }
 
@@ -10,7 +9,7 @@
   align-items: center;
   border: 1px solid #dfe1e5;
   box-shadow: none;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 24px;
   background-color: #fff;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
@@ -254,14 +253,16 @@
 
 @media (max-width: 768px) {
   .search_wrapper {
-    width: 100%;
+    width: calc(100% - 64px);
     max-width: 100%;
-    margin: 0;
+    margin: 0 auto;
   }
 
   .search_data {
     padding: 8px 14px;
     border-radius: 999px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .search_data input {

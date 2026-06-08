@@ -66,14 +66,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  transform: translateY(-40px);
 }
 
 .body img {
   width: min(272px, 70vw);
   height: auto;
   object-fit: contain;
-  margin-bottom: 24px;
 }
 
 /* Footer */
@@ -135,6 +134,7 @@
 
   .body img {
     width: min(220px, 75vw);
+    margin-bottom: 20px;
   }
 
   .footer__links {

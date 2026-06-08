@@ -1,7 +1,7 @@
 .search_wrapper {
   position: relative;
   width: min(92vw, 584px);
-  margin: 40px auto 0;
+  margin: 30px auto 0;
 }
 
 .search_data {
@@ -32,7 +32,7 @@
 
 .search_data > input {
   flex: 1;
-  font-size: medium;
+  font-size: 16px;
   border: none;
   background: transparent;
 }
@@ -65,7 +65,7 @@
 }
 
 .buttons.shortcuts {
-  margin-top: 40px;
+  margin-top: 28px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -91,21 +91,17 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 8px;
 }
 
 .shortcutCard {
-  width: 128px;
-  height: 128px;
+  width: 104px;
+  height: 100px;
 
-  border-radius: 24px;
+  border-radius: 16px;
 
-  background: rgba(255, 255, 255, 0.72);
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  border: 1px solid rgba(60, 64, 67, 0.12);
+  background: #f1f3f4;
+  border: none;
 
   display: flex;
   flex-direction: column;
@@ -115,22 +111,13 @@
   position: relative;
   overflow: hidden;
 
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
-    background-color 0.25s ease;
-
   cursor: pointer;
 
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06),
-    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition: background-color 0.2s ease;
 }
 
 .shortcutCard:hover {
-  transform: translateY(-4px);
-
-  background: rgba(255, 255, 255, 0.88);
-
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  background: #e8eaed;
 }
 
 .shortcutCard a {
@@ -142,7 +129,7 @@
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
+  gap: 8px;
 
   font-size: 13px;
   font-weight: 500;
@@ -151,18 +138,14 @@
 
   width: 100%;
 
-  transition: transform 0.25s ease;
-
   position: relative;
   z-index: 2;
 }
 
 .shortcutLogo {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-
-  background: linear-gradient(145deg, #f8f9fa, #dfe1e5);
 
   display: flex;
   justify-content: center;
@@ -174,13 +157,13 @@
   color: #202124;
   text-transform: uppercase;
 
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8),
-    0 2px 6px rgba(0, 0, 0, 0.08);
+  background: #e8eaed;
+  box-shadow: none;
 }
 
 .shortcutActions {
   position: absolute;
-  bottom: 10px;
+  bottom: 6px;
 
   display: flex;
   gap: 6px;
@@ -214,7 +197,7 @@
 }
 
 .shortcutActions .MuiIconButton-root:hover {
-  transform: scale(1.12);
+  transform: scale(1.05);
   opacity: 1;
 }
 
@@ -224,13 +207,12 @@
 }
 
 .addShortcutCard {
-  background-color: #f8f9fa;
-  border: 1px solid #dadce0;
+  background: #f1f3f4;
+  border: none;
 }
 
 .addShortcutCard:hover {
-  background-color: #ffffff;
-  border-color: #c6c6c6;
+  background: #e8eaed;
 }
 
 .addShortcutLogo {
@@ -239,7 +221,7 @@
 }
 
 .addShortcutText {
-  margin-top: 12px;
+  margin-top: 8px;
   font-size: 13px;
   font-weight: 500;
   color: #202124;
@@ -282,5 +264,23 @@
 
   .suggestionItem {
     padding: 14px 16px;
+  }
+
+  @media (max-width: 768px) {
+    .shortcutCard {
+      width: 88px;
+      height: 88px;
+    }
+  
+    .shortcutLogo {
+      width: 36px;
+      height: 36px;
+    }
+
+    .addShortcutText {
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
   }
 }

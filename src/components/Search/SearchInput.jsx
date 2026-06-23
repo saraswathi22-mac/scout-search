@@ -16,6 +16,7 @@ function SearchInput({
         value={input}
         onChange={(e) => handleSuggestions(e.target.value)}
         onKeyDown={handleKeyDown}
+        placeholder="What are you looking for?"
       />
 
       <MicIcon

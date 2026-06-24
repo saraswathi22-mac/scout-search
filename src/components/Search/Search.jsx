@@ -6,12 +6,10 @@ import useVoiceSearch from "../../hooks/useVoiceSearch";
 import { actionTypes } from "../../context/searchReducer";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
-import SearchShortcuts from "./SearchShortcuts";
 
-function Search({ hideButtons, inputValue }) {
+function Search({ inputValue }) {
   const { term, dispatch } = useStateValue();
   const [input, setInput] = useState(inputValue || "");
-  const [open, setOpen] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -22,14 +20,6 @@ function Search({ hideButtons, inputValue }) {
 
   const searchRef = useRef(null);
 
-  const openModal = () => {
-    setOpen(true);
-  };
-
-  const closeModal = () => {
-    setOpen(false);
-  };
-
   const navigate = useNavigate();
 
   const { transcript, isListening, startListening } = useVoiceSearch();
@@ -37,25 +27,24 @@ function Search({ hideButtons, inputValue }) {
   const recentSearches =
     JSON.parse(localStorage.getItem("recentSearches")) || [];
 
-    useEffect(() => {
-      if (!transcript) return;
-    
-      setInput(transcript);
-    
-      dispatch({
-        type: actionTypes.SET_SEARCH_TERM,
-        term: transcript,
-      });
-    
-      navigate("/search");
-    }, [transcript, dispatch, navigate]);
+  useEffect(() => {
+    if (!transcript) return;
 
-    useEffect(() => {
-      const savedShortcuts =
-        JSON.parse(localStorage.getItem("shortcuts")) || [];
-    
-      setShortcuts(savedShortcuts);
-    }, []);
+    setInput(transcript);
+
+    dispatch({
+      type: actionTypes.SET_SEARCH_TERM,
+      term: transcript,
+    });
+
+    navigate("/search");
+  }, [transcript, dispatch, navigate]);
+
+  useEffect(() => {
+    const savedShortcuts = JSON.parse(localStorage.getItem("shortcuts")) || [];
+
+    setShortcuts(savedShortcuts);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -229,24 +218,20 @@ function Search({ hideButtons, inputValue }) {
           />
         )}
       </div>
-      {!hideButtons ? (
-        <div className="buttons shortcuts">
-          <SearchShortcuts
-            open={open}
-            openModal={openModal}
-            closeModal={closeModal}
-            name={name}
-            setName={setName}
-            url={url}
-            setUrl={setUrl}
-            editId={editId}
-            handleShortcut={handleShortcut}
-            shortcuts={shortcuts}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-          />
+      <div className="feature-pills-container">
+        <div className="feature-pill">
+          <span className="pill-icon">⚡</span>
+          <span className="pill-text">Fast Results</span>
         </div>
-      ) : null}
+        <div className="feature-pill">
+          <span className="pill-icon">🎯</span>
+          <span className="pill-text">Smart Suggestions</span>
+        </div>
+        <div className="feature-pill">
+          <span className="pill-icon">⌨️</span>
+          <span className="pill-text">Keyboard Friendly</span>
+        </div>
+      </div>
     </form>
   );
 }

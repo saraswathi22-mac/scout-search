@@ -13,10 +13,6 @@ function Search({ inputValue }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
-  const [shortcuts, setShortcuts] = useState([]);
-  const [editId, setEditId] = useState(null);
 
   const searchRef = useRef(null);
 
@@ -39,12 +35,6 @@ function Search({ inputValue }) {
 
     navigate("/search");
   }, [transcript, dispatch, navigate]);
-
-  useEffect(() => {
-    const savedShortcuts = JSON.parse(localStorage.getItem("shortcuts")) || [];
-
-    setShortcuts(savedShortcuts);
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -141,61 +131,6 @@ function Search({ inputValue }) {
       term: trimmedInput || inputValue,
     });
     navigate("/search");
-  };
-
-  const handleShortcut = () => {
-    if (!name.trim() || !url.trim()) return;
-
-    const formattedUrl = url.startsWith("http") ? url : `https://${url}`;
-
-    let updatedShortcuts;
-
-    if (editId) {
-      updatedShortcuts = shortcuts.map((item) =>
-        item.id === editId
-          ? {
-              ...item,
-              name,
-              url: formattedUrl,
-            }
-          : item
-      );
-    } else {
-      updatedShortcuts = [
-        ...shortcuts,
-        {
-          id: Date.now(),
-          name,
-          url: formattedUrl,
-        },
-      ];
-    }
-
-    setShortcuts(updatedShortcuts);
-
-    localStorage.setItem("shortcuts", JSON.stringify(updatedShortcuts));
-
-    setName("");
-    setUrl("");
-    setEditId(null);
-
-    closeModal();
-  };
-
-  const handleDelete = (id) => {
-    const filteredShortcuts = shortcuts.filter((item) => item.id !== id);
-
-    setShortcuts(filteredShortcuts);
-
-    localStorage.setItem("shortcuts", JSON.stringify(filteredShortcuts));
-  };
-
-  const handleEdit = (item) => {
-    setName(item.name);
-    setUrl(item.url);
-    setEditId(item.id);
-
-    openModal();
   };
 
   return (

@@ -65,14 +65,6 @@
   font-size: 20px !important;
 }
 
-.buttons.shortcuts {
-  margin-top: 28px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 22px;
-}
-
 .searchIcon {
   color: #9aa0a6;
 }
@@ -88,145 +80,6 @@
   transform: scale(1.15);
 }
 
-.shortcutsContainer {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.shortcutCard {
-  width: 104px;
-  height: 100px;
-
-  border-radius: 16px;
-
-  background: #f1f3f4;
-  border: none;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  position: relative;
-  overflow: hidden;
-
-  cursor: pointer;
-
-  transition: background-color 0.2s ease;
-}
-
-.shortcutCard:hover {
-  background: #e8eaed;
-}
-
-.shortcutCard a {
-  text-decoration: none;
-  color: #202124;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
-  font-size: 13px;
-  font-weight: 500;
-
-  text-align: center;
-
-  width: 100%;
-
-  position: relative;
-  z-index: 2;
-}
-
-.shortcutLogo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 20px;
-  font-weight: 600;
-
-  color: #202124;
-  text-transform: uppercase;
-
-  background: #e8eaed;
-  box-shadow: none;
-}
-
-.shortcutActions {
-  position: absolute;
-  bottom: 6px;
-
-  display: flex;
-  gap: 6px;
-
-  opacity: 0;
-  transform: translateY(10px);
-
-  transition: opacity 0.25s ease, transform 0.25s ease;
-
-  z-index: 3;
-}
-
-.shortcutCard:hover .shortcutActions {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.shortcutActions .MuiIconButton-root {
-  padding: 4px !important;
-
-  background: transparent !important;
-
-  opacity: 0.75;
-
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.shortcutCard:hover .MuiIconButton-root {
-  opacity: 0.7;
-  transform: translateY(0);
-}
-
-.shortcutActions .MuiIconButton-root:hover {
-  transform: scale(1.05);
-  opacity: 1;
-}
-
-.editBtn,
-.deleteBtn {
-  color: #5f6368 !important;
-}
-
-.addShortcutCard {
-  background: #f1f3f4;
-  border: none;
-}
-
-.addShortcutCard:hover {
-  background: #e8eaed;
-}
-
-.addShortcutLogo {
-  background-color: #e8eaed;
-  color: #5f6368;
-}
-
-.addShortcutText {
-  margin-top: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #202124;
-}
 
 .activeSuggestion {
   background: #f1f3f4;
@@ -313,22 +166,5 @@
 
   .suggestionItem {
     padding: 14px 16px;
-  }
-
-  @media (max-width: 768px) {
-    .shortcutCard {
-      width: 88px;
-      height: 88px;
-    }
-
-    .shortcutLogo {
-      width: 36px;
-      height: 36px;
-    }
-
-    .addShortcutText {
-      margin-top: 6px;
-      font-size: 12px;
-    }
   }
 }

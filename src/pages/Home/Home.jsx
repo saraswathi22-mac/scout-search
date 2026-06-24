@@ -12,8 +12,21 @@ function Home() {
           <Link to="/">Features</Link>
         </div>
         <nav className="header__right">
-          <Link to="/">GitHub</Link>
-          <Link to="/">Portfolio</Link>
+          <a
+            href="https://github.com/saraswathi22-mac"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+
+          <a
+            href="https://saraswathi-portfolio.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Portfolio
+          </a>
           <LightModeIcon />
         </nav>
       </header>

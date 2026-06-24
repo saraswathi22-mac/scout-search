@@ -13,12 +13,12 @@ function SearchInput({
       <SearchIcon className="searchIcon" />
 
       <input
+        type="text"
         value={input}
         onChange={(e) => handleSuggestions(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="What are you looking for?"
+        placeholder="Search Scout..."
       />
-
       <MicIcon
         onClick={startListening}
         className={`micIcon ${isListening ? "listening" : ""}`}

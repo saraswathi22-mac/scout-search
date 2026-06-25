@@ -4,7 +4,8 @@ import Search from "../../components/Search/Search";
 import "./SearchPage.css";
 import { useStateValue } from "../../context/StateProvider";
 import { useGoogleSearch } from "../../hooks/useGoogleSearch";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Dropdown from "../../components/DropDown/Dropdown";
 import {
   searchPageMore,
@@ -91,11 +92,7 @@ function SearchPage() {
                 key={label}
                 onClick={() => setActiveLabel(label)}
               >
-                <Link
-                  to={label === "All" ? "/search" : `/${label.toLowerCase()}`}
-                >
-                  {label}
-                </Link>
+                <Link to={label === "All" ? "/search" : ""}>{label}</Link>
               </div>
             ))}
 
@@ -107,21 +104,26 @@ function SearchPage() {
                 }}
                 className="sP_option_dropdown_btn"
               >
-                <MoreVertIcon className="moreVertIcon" />
-                <div>More</div>
+                {show ? (
+                  <ArrowDropUpIcon className="moreVertIcon" />
+                ) : (
+                  <ArrowDropDownIcon className="moreVertIcon" />
+                )}
+
+                <div>Discover</div>
               </button>
 
               {show && <Dropdown show={show} items={searchPageMore} />}
             </div>
           </div>
 
-          <div className="sP_optionsRight">
+          {/* <div className="sP_optionsRight">
             {searchPageOptionsRight.map((label) => (
               <div className="sP_option" key={label}>
                 <Link to={`/${label.toLowerCase()}`}>{label}</Link>
               </div>
             ))}
-          </div>
+          </div> */}
         </nav>
       </div>
 

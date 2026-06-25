@@ -1,11 +1,4 @@
-export const searchPageOptionsLeft = [
-  "All",
-  "Images",
-  "Shopping",
-  "Videos",
-  "Short Videos",
-  "News",
-];
+export const searchPageOptionsLeft = ["All", "Photos", "Videos", "Updates"];
 
 export const searchPageMore = ["Maps", "Web", "Books"];
 

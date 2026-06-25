@@ -1,0 +1,19 @@
+:root {
+  --bg-color: #ffffff;
+  --surface-color: #ffffff;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --border-color: #e0e0e0;
+  --hover-color: #f5f7fb;
+  --accent-color: #0f62fe;
+}
+
+body.dark {
+  --bg-color: #1c1f24;
+  --surface-color: #262a30;
+  --text-primary: #f5f7fa;
+  --text-secondary: #c4c9d1;
+  --border-color: #3a3f46;
+  --hover-color: rgba(255, 255, 255, 0.08);
+  --accent-color: #7cb9ff;
+}

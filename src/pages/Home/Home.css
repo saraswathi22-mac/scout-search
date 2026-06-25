@@ -3,6 +3,9 @@
   flex-direction: column;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -25,12 +28,11 @@
 }
 
 .header a {
-  color: #202124;
+  color: var(--text-primary);
   text-decoration: none;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: -0.01em;
-  transition: color 0.2s ease;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -39,16 +41,16 @@
 
 .header__left a {
   font-weight: 500;
-  color: #3c4043;
+  color: var(--text-primary);
 }
 
 .header__right a {
   font-weight: 400;
-  color: #5f6368;
+  color: var(--text-secondary);
 }
 
 .header a:hover {
-  color: #5b5bd6;
+  color: var(--accent-color);
   text-decoration: none;
 }
 
@@ -56,13 +58,14 @@
   cursor: pointer;
   padding: 6px;
   border-radius: 50%;
-  color: #5f6368;
+  color: var(--text-secondary);
   font-size: 22px;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .header__right .MuiSvgIcon-root:hover {
-  background-color: rgba(60, 64, 67, 0.08);
+  background: var(--hover-color);
+  color: var(--text-primary);
 }
 
 .header__avatar {
@@ -75,6 +78,38 @@
 .header__avatar:hover {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.14);
   transform: scale(1.02);
+}
+
+/* Theme toggle button styles */
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.themeToggle:hover {
+  background: var(--hover-color);
+}
+
+.themeToggle:active {
+  transform: scale(0.95);
+}
+
+.themeToggle .MuiSvgIcon-root {
+  color: var(--text-secondary);
+  font-size: 22px;
+  transition: color 0.2s ease;
+}
+
+.themeToggle:hover .MuiSvgIcon-root {
+  color: var(--text-primary);
 }
 
 /* Main Content */
@@ -102,15 +137,16 @@
   justify-content: center;
   align-items: center;
   padding: 0.9rem 1.5rem;
-  border-top: 1px solid #f1f3f4;
-  background-color: #fff;
+  border-top: 1px solid var(--border-color);
+  background: var(--surface-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .footer__copyright {
   margin: 0;
   font-size: 12px;
   font-weight: 400;
-  color: #5f6368;
+  color: var(--text-secondary);
   letter-spacing: 0.02em;
   user-select: none;
 }

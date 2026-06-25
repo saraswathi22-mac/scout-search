@@ -1,14 +1,17 @@
 import { useState } from "react";
 import "./Home.css";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 import Search from "../../components/Search/Search";
 import AboutDialog from "../../components/AppDialog/AboutDialog";
 import FeaturesDialog from "../../components/AppDialog/FeatureDialog";
+import { useTheme } from "../../context/ThemeContext";
 
 function Home() {
   const [openAbout, setOpenAbout] = useState(false);
   const [openFeatures, setOpenFeatures] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="home">
@@ -43,13 +46,23 @@ function Home() {
             Portfolio
           </a>
 
-          <LightModeIcon />
+          <button
+            className="themeToggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+          </button>
         </nav>
       </header>
 
       <main className="body">
         <img
-          src="/scout-brand1.png"
+          src={
+            theme === "dark"
+              ? "/scout-brand-dark.png"
+              : "/scout-brand-light1.png"
+          }
           alt="Scout logo"
           width={340}
           height={340}

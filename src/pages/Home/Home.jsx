@@ -61,7 +61,7 @@ function Home() {
           src={
             theme === "dark"
               ? "/scout-brand-dark.png"
-              : "/scout-brand-light1.png"
+              : "/scout-brand-light.png"
           }
           alt="Scout logo"
           width={340}

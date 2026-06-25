@@ -1,10 +1,10 @@
-import { getFavicon } from "../../utils/getFavicon";
+import { getSiteFavicon } from "../../utils/getSiteFavicon";
 import { getSiteName } from "../../utils/getSiteName";
 import "./SiteInfo.css";
 
 const SiteInfo = ({ url }) => {
   const siteName = getSiteName(url);
-  const faviconUrl = getFavicon(url);
+  const faviconUrl = getSiteFavicon(url);
   return (
     <a href={url} className="site-info">
       <img src={faviconUrl} alt={`${siteName} icon`} className="site-icon" />

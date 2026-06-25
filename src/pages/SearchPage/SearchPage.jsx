@@ -13,7 +13,7 @@ import {
   searchPageOptionsRight,
 } from "../../constants";
 import SiteInfo from "../../components/SiteInfo/SiteInfo";
-import { getFavicon } from "../../utils/getFavicon";
+import { getSiteFavicon } from "../../utils/getSiteFavicon";
 import { useDebounce } from "../../hooks/useDebounce";
 import ResultSkeleton from "../../components/ResultSkeleton/ResultSkeleton";
 
@@ -173,7 +173,7 @@ function SearchPage() {
                       alt="Thumbnail"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = getFavicon(item.link);
+                        e.target.src = getSiteFavicon(item.link);
                       }}
                     />
                   )}

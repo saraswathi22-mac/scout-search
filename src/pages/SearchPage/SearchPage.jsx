@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search";
 import "./SearchPage.css";
 import { useStateValue } from "../../context/StateProvider";
-import { useGoogleSearch } from "../../hooks/useGoogleSearch";
+import { useSearch } from "../../hooks/useSearch";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Dropdown from "../../components/DropDown/Dropdown";
@@ -20,7 +20,7 @@ import ResultSkeleton from "../../components/ResultSkeleton/ResultSkeleton";
 function SearchPage() {
   const { term } = useStateValue();
   const debouncedTerm = useDebounce(term?.term, 500);
-  const { data, loading, error } = useGoogleSearch(debouncedTerm);
+  const { data, loading, error } = useSearch(debouncedTerm);
 
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");

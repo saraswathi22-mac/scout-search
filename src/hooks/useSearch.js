@@ -3,12 +3,10 @@ import { API_KEY, CONTEXT_KEY } from "../config";
 
 const searchCache = {};
 
-export const useGoogleSearch = (term) => {
+export const useSearch = (term) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  
 
   useEffect(() => {
     if (!term) return;
@@ -18,7 +16,7 @@ export const useGoogleSearch = (term) => {
     const fetchData = async () => {
       // check cache first
       if (searchCache[cacheKey]) {
-        setData(searchCache[term]);
+        setData(searchCache[cacheKey]);
         return;
       }
       setLoading(true);

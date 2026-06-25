@@ -7,7 +7,7 @@ import { actionTypes } from "../../context/searchReducer";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 
-function Search({ inputValue }) {
+function Search({ inputValue, showFeatures = true }) {
   const { term, dispatch } = useStateValue();
   const [input, setInput] = useState(inputValue || "");
   const [suggestions, setSuggestions] = useState([]);
@@ -153,20 +153,22 @@ function Search({ inputValue }) {
           />
         )}
       </div>
-      <div className="feature-pills-container">
-        <div className="feature-pill">
-          <span className="pill-icon">⚡</span>
-          <span className="pill-text">Fast Results</span>
+      {showFeatures && (
+        <div className="feature-pills-container">
+          <div className="feature-pill">
+            <span className="pill-icon">⚡</span>
+            <span className="pill-text">Fast Results</span>
+          </div>
+          <div className="feature-pill">
+            <span className="pill-icon">🎯</span>
+            <span className="pill-text">Smart Suggestions</span>
+          </div>
+          <div className="feature-pill">
+            <span className="pill-icon">⌨️</span>
+            <span className="pill-text">Keyboard Friendly</span>
+          </div>
         </div>
-        <div className="feature-pill">
-          <span className="pill-icon">🎯</span>
-          <span className="pill-text">Smart Suggestions</span>
-        </div>
-        <div className="feature-pill">
-          <span className="pill-icon">⌨️</span>
-          <span className="pill-text">Keyboard Friendly</span>
-        </div>
-      </div>
+      )}
     </form>
   );
 }

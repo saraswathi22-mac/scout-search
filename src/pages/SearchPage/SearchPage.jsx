@@ -71,16 +71,12 @@ function SearchPage() {
       <header className={`sP_header ${showBorder ? "headerBorder" : ""}`}>
         <div className="sP_logoWrapper">
           <Link to="/">
-            <img
-              className="sP_logo"
-              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-              alt="Google Logo"
-            />
+            <img className="sP_logo" src="/scout-brand.png" alt="Scout logo" />
           </Link>
         </div>
 
         <div className="sP_headerBody">
-          <Search hideButtons inputValue={term?.term} />
+          <Search showFeatures={false} inputValue={term?.term} />
         </div>
       </header>
 

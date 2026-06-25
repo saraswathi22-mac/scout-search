@@ -1,23 +1,32 @@
 .sP_header {
   display: flex;
+  align-items: center;
+  padding: 20px 30px 12px;
   position: sticky;
   top: 0;
-  background-color: #fff;
+  background: #fff;
   z-index: 100;
-  align-items: flex-start;
-  padding: 20px 30px 12px;
-  transition: padding 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sP_logoWrapper {
+  width: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .sP_logo {
+  width: 60px;
+  height: auto;
+  display: block;
   object-fit: contain;
-  height: 30px;
-  margin: 10px 30px;
-  transition: height 0.2s ease, margin 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .sP_headerBody {
-  margin-left: 25px;
+  margin-left: 20px;
+  max-width: 700px;
   flex: 1;
 }
 
@@ -33,7 +42,7 @@
 
 .sP_headerBody > .search > .search_wrapper {
   width: 100%;
-  max-width: 692px;
+  max-width: 640px;
   margin: 0;
 }
 

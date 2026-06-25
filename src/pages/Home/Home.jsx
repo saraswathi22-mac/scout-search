@@ -55,7 +55,7 @@ function Home() {
           height={340}
         />
 
-        <Search hideButtons={false} />
+        <Search />
       </main>
 
       <footer className="footer">

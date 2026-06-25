@@ -1,28 +1,35 @@
-# google-search-clone
+# Scout
 
-# Google Search Clone
+Scout is a modern search application built with React that delivers a clean and familiar search experience. Users can search for information, browse relevant results, view website snippets, and quickly identify sites with their favicons.
 
-This project is a Google Search Clone built using React that replicates the core search experience of Google. Users can enter a search query and view results similar to the real Google search page, including titles, links, snippets, and website icons.
+The project focuses on frontend architecture, API integration, performance optimization, and building a responsive, user-friendly search interface.
 
-The goal of this project is to practice real-world frontend development, API integration, and building a UI that closely resembles a well-known product.
+## Features
 
-# Features
-- Search for any keyword
-- Display search results similar to Google
-- Shows titles, links, snippets, and website favicons
-- Loading state while fetching results
-- Clean and responsive UI
-- Component-based architecture using React
+- 🔍 Search for any keyword
+- 💡 Real-time search suggestions
+- 📄 Display relevant search results with titles, links, and snippets
+- 🌐 Show website favicons for easy identification
+- ⚡ Search result caching for improved performance
+- 🎙️ Voice search support
+- 🌙 Light & Dark theme
+- ⏳ Loading and error states
+- 📱 Fully responsive design
+- 🧩 Component-based architecture using React
 
-# Tech Stack
+## Tech Stack
 
-Frontend
+### Frontend
+
 - React
 - JavaScript (ES6+)
 - HTML5
 - CSS3
 
-Libraries / Tools
+### Libraries & Tools
+
 - React Router
-- Material UI
-- Google Search API (or Custom Search API if used)
+- Material UI (MUI)
+- Vite
+- Google Custom Search JSON API
+- Google Search Suggestions API

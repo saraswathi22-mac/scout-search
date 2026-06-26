@@ -4,11 +4,25 @@
   gap: 8px;
   font-size: 14px;
   text-decoration: none;
-  color: #1a0dab;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.site-info:hover {
+  color: var(--accent-color);
 }
 
 .site-icon {
   width: 16px;
   height: 16px;
   object-fit: contain;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--favicon-bg);
+  border: 1px solid var(--favicon-border);
+  box-sizing: content-box;
+}
+
+.site-name {
+  color: inherit;
 }

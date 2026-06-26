@@ -7,6 +7,8 @@
   --hover-color: #f5f7fb;
   --accent-color: #0f62fe;
   --visited-link: #681da8;
+  --favicon-bg: #ffffff;
+  --favicon-border: #e0e0e0;
 }
 
 body.dark {
@@ -18,4 +20,6 @@ body.dark {
   --hover-color: rgba(255, 255, 255, 0.08);
   --accent-color: #7cb9ff;
   --visited-link: #c58cff;
+  --favicon-bg: #f3f4f6;
+  --favicon-border: #d1d5db;
 }

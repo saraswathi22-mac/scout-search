@@ -7,23 +7,35 @@
 .search_data {
   display: flex;
   align-items: center;
-  border: 1px solid #dfe1e5;
+  border: 1px solid var(--border-color);
   box-shadow: none;
   padding: 12px 20px;
   border-radius: 24px;
-  background-color: #fff;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  background: var(--surface-color);
+  transition: background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
 }
 
 .search_data:hover {
-  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
-  border-color: rgba(223, 225, 229, 0);
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.18);
+  border-color: transparent;
+}
+
+body.dark .search_data:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
 .search_data:focus-within {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 1px #60a5fa, 0 4px 20px rgba(26, 115, 232, 0.15);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color),
+              0 4px 20px rgba(26, 115, 232, 0.15);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark .search_data:focus-within {
+  box-shadow: 0 0 0 1px var(--accent-color),
+              0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
 .search_wrapper .search_data {
@@ -36,6 +48,11 @@
   font-size: 16px;
   border: none;
   background: transparent;
+  color: var(--text-primary);
+}
+
+.search_data > input::placeholder {
+  color: var(--text-secondary);
 }
 
 .search_data > input:focus {
@@ -44,9 +61,10 @@
 
 .suggestions {
   width: calc(100% + 40px);
-  background: white;
+  background: var(--surface-color);
   margin-top: 8px;
   border-radius: 24px;
+  border: 1px solid var(--border-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
@@ -58,15 +76,17 @@
   padding: 12px 20px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  color: var(--text-primary);
 }
 
 .suggestionIcon {
-  color: #9aa0a6;
   font-size: 20px !important;
 }
 
-.searchIcon {
-  color: #9aa0a6;
+.suggestionIcon,
+.searchIcon,
+.micIcon {
+  color: var(--text-secondary);
 }
 
 .micIcon {
@@ -75,14 +95,14 @@
 }
 
 .listening {
-  color: #4285f4;
+  color: var(--accent-color);
   animation: pulse 1.2s infinite;
   transform: scale(1.15);
 }
 
 
 .activeSuggestion {
-  background: #f1f3f4;
+  background: var(--hover-color);
 }
 
 .feature-pills-container {
@@ -99,14 +119,14 @@
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--surface-color);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   border-radius: 9999px;
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
-  color: #374151;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03);
   transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
@@ -117,8 +137,8 @@
 }
 
 .feature-pill:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.12);
+  background: var(--hover-color);
+  border-color: var(--border-color);
   transform: translateY(-1px) scale(1.02);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 10px 20px rgba(0, 0, 0, 0.06); /* Deepens shadow slightly on hover */
 }

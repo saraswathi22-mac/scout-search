@@ -6,6 +6,7 @@
   --border-color: #e0e0e0;
   --hover-color: #f5f7fb;
   --accent-color: #0f62fe;
+  --visited-link: #681da8;
 }
 
 body.dark {
@@ -16,4 +17,5 @@ body.dark {
   --border-color: #3a3f46;
   --hover-color: rgba(255, 255, 255, 0.08);
   --accent-color: #7cb9ff;
+  --visited-link: #c58cff;
 }

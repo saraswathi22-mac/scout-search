@@ -16,9 +16,13 @@ import SiteInfo from "../../components/SiteInfo/SiteInfo";
 import { getSiteFavicon } from "../../utils/getSiteFavicon";
 import { useDebounce } from "../../hooks/useDebounce";
 import ResultSkeleton from "../../components/ResultSkeleton/ResultSkeleton";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useTheme } from "../../context/ThemeContext";
 
 function SearchPage() {
   const { term } = useStateValue();
+  const { theme, toggleTheme } = useTheme();
   const debouncedTerm = useDebounce(term?.term, 500);
   const { data, loading, error } = useSearch(debouncedTerm);
 
@@ -72,12 +76,28 @@ function SearchPage() {
       <header className={`sP_header ${showBorder ? "headerBorder" : ""}`}>
         <div className="sP_logoWrapper">
           <Link to="/">
-            <img className="sP_logo" src="/scout-brand.png" alt="Scout logo" />
+            <img
+              className="sP_logo"
+              src={
+                theme === "dark"
+                  ? "/scout-brand-dark.png"
+                  : "/scout-brand-light.png"
+              }
+              alt="Scout logo"
+            />
           </Link>
         </div>
 
         <div className="sP_headerBody">
           <Search showFeatures={false} inputValue={term?.term} />
+
+          <button
+            className="themeToggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+          </button>
         </div>
       </header>
 

@@ -4,8 +4,7 @@ function SearchSuggestions({
   suggestions,
   selectedIndex,
   setSelectedIndex,
-  setInput,
-  setShowSuggestions,
+  onSuggestionClick,
 }) {
   return (
     <div className="suggestions">
@@ -16,11 +15,7 @@ function SearchSuggestions({
             selectedIndex === index ? "activeSuggestion" : ""
           }`}
           onMouseEnter={() => setSelectedIndex(index)}
-          onClick={() => {
-            setInput(item);
-            setShowSuggestions(false);
-            setSelectedIndex(-1);
-          }}
+          onClick={() => onSuggestionClick(item)}
         >
           <SearchIcon className="suggestionIcon" />
           {item}

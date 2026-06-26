@@ -126,10 +126,30 @@ function Search({ inputValue, showFeatures = true }) {
 
     localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
 
+    // Hide suggestions
+    setSuggestions([]);
+    setShowSuggestions(false);
+    setSelectedIndex(-1);
+
     dispatch({
       type: actionTypes.SET_SEARCH_TERM,
-      term: trimmedInput || inputValue,
+      term: trimmedInput,
     });
+
+    navigate("/search");
+  };
+
+  const handleSuggestionClick = (value) => {
+    setInput(value);
+    setSuggestions([]);
+    setShowSuggestions(false);
+    setSelectedIndex(-1);
+
+    dispatch({
+      type: actionTypes.SET_SEARCH_TERM,
+      term: value,
+    });
+
     navigate("/search");
   };
 
@@ -148,8 +168,7 @@ function Search({ inputValue, showFeatures = true }) {
             suggestions={suggestions}
             selectedIndex={selectedIndex}
             setSelectedIndex={setSelectedIndex}
-            setInput={setInput}
-            setShowSuggestions={setShowSuggestions}
+            onSuggestionClick={handleSuggestionClick}
           />
         )}
       </div>

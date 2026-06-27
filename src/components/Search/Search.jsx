@@ -155,7 +155,12 @@ function Search({ inputValue, showFeatures = true }) {
 
   return (
     <form className="search" onSubmit={handleSearch}>
-      <div className="search_wrapper" ref={searchRef}>
+      <div
+        className={`search_wrapper ${
+          showSuggestions && suggestions.length > 0 ? "expanded" : ""
+        }`}
+        ref={searchRef}
+      >
         <SearchInput
           input={input}
           handleSuggestions={handleSuggestions}

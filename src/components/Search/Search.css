@@ -49,6 +49,11 @@ body.dark .search_data:focus-within {
   color: var(--text-primary);
 }
 
+.search_data,
+.suggestions {
+  box-sizing: border-box;
+}
+
 .search_data > input::placeholder {
   color: var(--text-secondary);
 }

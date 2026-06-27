@@ -93,6 +93,8 @@ function SearchPage() {
 
           <button
             className="themeToggle"
+            data-theme-toggle
+            onMouseDown={(e) => e.preventDefault()}
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >

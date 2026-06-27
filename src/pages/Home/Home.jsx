@@ -48,6 +48,8 @@ function Home() {
 
           <button
             className="themeToggle"
+            data-theme-toggle
+            onMouseDown={(e) => e.preventDefault()}
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
@@ -68,7 +70,7 @@ function Home() {
           height={340}
         />
 
-        <Search />
+        <Search className="homeSearch" />
       </main>
 
       <footer className="footer">

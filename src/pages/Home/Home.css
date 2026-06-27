@@ -8,6 +8,10 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+.homeSearch .search_wrapper {
+  width: min(92vw, 700px);
+}
+
 /* Header */
 
 .header {

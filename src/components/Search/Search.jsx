@@ -7,7 +7,7 @@ import { actionTypes } from "../../context/searchReducer";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 
-function Search({ inputValue, showFeatures = true }) {
+function Search({ inputValue, showFeatures = true, className = "" }) {
   const { term, dispatch } = useStateValue();
   const [input, setInput] = useState(inputValue || "");
   const [suggestions, setSuggestions] = useState([]);
@@ -38,6 +38,11 @@ function Search({ inputValue, showFeatures = true }) {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Ignore clicks on the theme toggle
+      if (event.target.closest("[data-theme-toggle]")) {
+        return;
+      }
+
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSuggestions(false);
         setSelectedIndex(-1);
@@ -154,7 +159,7 @@ function Search({ inputValue, showFeatures = true }) {
   };
 
   return (
-    <form className="search" onSubmit={handleSearch}>
+    <form className={`search ${className}`} onSubmit={handleSearch}>
       <div
         className={`search_wrapper ${
           showSuggestions && suggestions.length > 0 ? "expanded" : ""

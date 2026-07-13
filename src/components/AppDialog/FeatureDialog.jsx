@@ -10,9 +10,9 @@ function FeaturesDialog({ open, onClose }) {
       description: "Instant search powered by optimized queries.",
     },
     {
-      icon: "🎯",
-      title: "Smart Suggestions",
-      description: "Recent searches appear as you type.",
+      icon: "🎙️",
+      title: "Voice Search",
+      description: "Search hands-free with built-in speech recognition.",
     },
     {
       icon: "⌨️",
@@ -20,9 +20,9 @@ function FeaturesDialog({ open, onClose }) {
       description: "Navigate suggestions with arrow keys and Enter.",
     },
     {
-      icon: "🎙️",
-      title: "Voice Search",
-      description: "Search hands-free with built-in speech recognition.",
+      icon: "🎯",
+      title: "Smart Suggestions",
+      description: "Recent searches appear as you type.",
     },
   ];
 

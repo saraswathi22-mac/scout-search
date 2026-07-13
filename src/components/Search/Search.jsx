@@ -189,8 +189,8 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
             <span className="pill-text">Fast Results</span>
           </div>
           <div className="feature-pill">
-            <span className="pill-icon">🎯</span>
-            <span className="pill-text">Smart Suggestions</span>
+            <span className="pill-icon">🎤</span>
+            <span className="pill-text">Voice Search</span>
           </div>
           <div className="feature-pill">
             <span className="pill-icon">⌨️</span>

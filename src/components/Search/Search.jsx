@@ -6,6 +6,9 @@ import useVoiceSearch from "../../hooks/useVoiceSearch";
 import { actionTypes } from "../../context/searchReducer";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
+import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
+import MicRoundedIcon from "@mui/icons-material/MicRounded";
+import KeyboardRoundedIcon from "@mui/icons-material/KeyboardRounded";
 
 function Search({ inputValue, showFeatures = true, className = "" }) {
   const { term, dispatch } = useStateValue();
@@ -67,7 +70,7 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
     }
 
     const filteredSuggestions = recentSearches.filter((item) =>
-      item.toLowerCase().includes(value.toLowerCase())
+      item.toLowerCase().includes(value.toLowerCase()),
     );
 
     setSuggestions(filteredSuggestions);
@@ -80,7 +83,7 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
       e.preventDefault();
 
       setSelectedIndex((prev) =>
-        prev < suggestions.length - 1 ? prev + 1 : 0
+        prev < suggestions.length - 1 ? prev + 1 : 0,
       );
     }
 
@@ -88,7 +91,7 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
       e.preventDefault();
 
       setSelectedIndex((prev) =>
-        prev > 0 ? prev - 1 : suggestions.length - 1
+        prev > 0 ? prev - 1 : suggestions.length - 1,
       );
     }
 
@@ -125,7 +128,7 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
     const updatedSearches = [
       trimmedInput,
       ...recentSearches.filter(
-        (item) => item.toLowerCase() !== trimmedInput.toLowerCase()
+        (item) => item.toLowerCase() !== trimmedInput.toLowerCase(),
       ),
     ].slice(0, 5);
 
@@ -185,16 +188,18 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
       {showFeatures && (
         <div className="feature-pills-container">
           <div className="feature-pill">
-            <span className="pill-icon">⚡</span>
+            <BoltRoundedIcon className="pill-icon" fontSize="small" />
             <span className="pill-text">Fast Results</span>
           </div>
+
           <div className="feature-pill">
-            <span className="pill-icon">🎤</span>
+            <MicRoundedIcon className="pill-icon" fontSize="small" />
             <span className="pill-text">Voice Search</span>
           </div>
+
           <div className="feature-pill">
-            <span className="pill-icon">⌨️</span>
-            <span className="pill-text">Keyboard Friendly</span>
+            <KeyboardRoundedIcon className="pill-icon" fontSize="small" />
+            <span className="pill-text">Keyboard Navigation</span>
           </div>
         </div>
       )}

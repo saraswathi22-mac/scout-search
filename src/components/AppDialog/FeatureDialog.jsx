@@ -16,7 +16,7 @@ function FeaturesDialog({ open, onClose }) {
     },
     {
       icon: "⌨️",
-      title: "Keyboard Friendly",
+      title: "Keyboard Navigation",
       description: "Navigate suggestions with arrow keys and Enter.",
     },
     {
@@ -36,13 +36,8 @@ function FeaturesDialog({ open, onClose }) {
     >
       <div className="featureList">
         {features.map((feature) => (
-          <div
-            key={feature.title}
-            className="featureItem"
-          >
-            <span className="featureEmoji">
-              {feature.icon}
-            </span>
+          <div key={feature.title} className="featureItem">
+            <span className="featureEmoji">{feature.icon}</span>
 
             <div className="featureInfo">
               <h3>{feature.title}</h3>

@@ -74,7 +74,7 @@ function Home() {
       </main>
 
       <footer className="footer">
-        <p className="footer__copyright">&copy; 2026 Scout</p>
+        <p className="footer__copyright">&copy; 2026 Scout. Crafted by Saraswathi.</p>
       </footer>
 
       <AboutDialog open={openAbout} onClose={() => setOpenAbout(false)} />

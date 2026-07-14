@@ -242,7 +242,7 @@ body.dark .resultRow {
   font-weight: 400;
   letter-spacing: -0.1px;
   line-height: 1.4;
-  margin-top: 4px;
+  margin-top: 6px;
   transition: color 0.2s ease;
   cursor: pointer;
 }
@@ -299,6 +299,7 @@ body.dark .resultRow {
   padding: 0 2px;
   border-radius: 4px;
 }
+
 /* MOBILE */
 
 @media (max-width: 768px) {

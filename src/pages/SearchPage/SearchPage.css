@@ -2,7 +2,9 @@
   min-height: 100vh;
   background: var(--bg-color);
   color: var(--text-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .sP_header {
@@ -13,7 +15,9 @@
   top: 0;
   background: var(--surface-color);
   z-index: 100;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .sP_logoWrapper {
@@ -72,7 +76,9 @@
   width: 100%;
   margin: 0;
   box-sizing: border-box;
-  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .search_data input:focus {
@@ -175,10 +181,32 @@
 }
 
 .resultsInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
   color: var(--text-secondary);
   font-size: 14px;
   margin-bottom: 20px;
   padding-left: 4px;
+}
+
+.resultsInfoIcon {
+  font-size: 16px !important;
+  color: var(--text-secondary);
+  opacity: 0.75;
+  transition: all 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+  cursor: pointer;
+  transform: translateY(2px);
+}
+
+.resultsInfoIcon:hover {
+  opacity: 1;
+  transform: scale(1.08);
 }
 
 .resultRow {
@@ -188,7 +216,9 @@
   margin-bottom: 16px;
   padding: 16px;
   border-radius: 14px;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .resultRow:hover {
@@ -418,7 +448,9 @@ body.dark .resultRow {
 .sP_optionsWrapper {
   background: var(--surface-color);
   border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 @media (max-width: 768px) {
@@ -434,7 +466,9 @@ body.dark .resultRow {
 }
 
 .sP_headerBody > .search > .search_wrapper > .search_data {
-  transition: height 0.2s ease, box-shadow 0.2s ease,
+  transition:
+    height 0.2s ease,
+    box-shadow 0.2s ease,
     background-color 0.2s ease;
 }
 

@@ -19,6 +19,8 @@ import ResultSkeleton from "../../components/ResultSkeleton/ResultSkeleton";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useTheme } from "../../context/ThemeContext";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import Tooltip from "@mui/material/Tooltip";
 
 function SearchPage() {
   const { term } = useStateValue();
@@ -36,7 +38,7 @@ function SearchPage() {
     const words = keyword.trim().split(/\s+/);
 
     const escapedWords = words.map((word) =>
-      word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
     );
 
     const regex = new RegExp(`(${escapedWords.join("|")})`, "gi");
@@ -48,7 +50,7 @@ function SearchPage() {
         </span>
       ) : (
         part
-      )
+      ),
     );
   };
 
@@ -160,10 +162,42 @@ function SearchPage() {
             </>
           ) : data?.items?.length ? (
             <>
-              <p className="resultsInfo">
-                About {data?.searchInformation?.formattedTotalResults} results (
-                {data?.searchInformation?.formattedSearchTime} seconds)
-              </p>
+              <div className="resultsInfo">
+                <span>
+                  About {data?.searchInformation?.formattedTotalResults} results
+                  ({data?.searchInformation?.formattedSearchTime} seconds)
+                </span>
+
+                <Tooltip
+                  title="Powered by Google Programmable Search"
+                  arrow
+                  placement="right"
+                  slotProps={{
+                    tooltip: {
+                      sx: {
+                        bgcolor: "var(--surface-color)",
+                        color: "var(--text-primary)",
+                        border: "1px solid var(--border-color)",
+                        borderRadius: "10px",
+                        fontSize: "12px",
+                        fontWeight: 500,
+                        px: 1.2,
+                        py: 0.8,
+                        boxShadow: "0 4px 12px rgba(0,0,0,.08)",
+                      },
+                    },
+                    arrow: {
+                      sx: {
+                        color: "var(--surface-color)",
+                      },
+                    },
+                  }}
+                >
+                  <span>
+                    <InfoOutlinedIcon className="resultsInfoIcon" />
+                  </span>
+                </Tooltip>
+              </div>
 
               {data.items.map((item) => (
                 <div className="resultRow" key={item.link}>

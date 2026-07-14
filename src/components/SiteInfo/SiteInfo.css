@@ -23,6 +23,25 @@
   box-sizing: content-box;
 }
 
+.site-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0; /* Allows ellipsis to work properly */
+}
+
 .site-name {
-  color: inherit;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.site-path {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

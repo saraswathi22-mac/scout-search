@@ -18,6 +18,7 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const searchRef = useRef(null);
+  const inputRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -56,6 +57,31 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      // Ignore if user is already typing
+      const activeElement = document.activeElement;
+      const isTyping =
+        activeElement.tagName === "INPUT" ||
+        activeElement.tagName === "TEXTAREA" ||
+        activeElement.isContentEditable;
+
+      if (isTyping) return;
+
+      if (e.key === "/") {
+        e.preventDefault();
+
+        inputRef.current?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleGlobalKeyDown);
     };
   }, []);
 
@@ -164,9 +190,8 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
   return (
     <form className={`search ${className}`} onSubmit={handleSearch}>
       <div
-        className={`search_wrapper ${
-          showSuggestions && suggestions.length > 0 ? "expanded" : ""
-        }`}
+        className={`search_wrapper ${showSuggestions && suggestions.length > 0 ? "expanded" : ""
+          }`}
         ref={searchRef}
       >
         <SearchInput
@@ -175,6 +200,7 @@ function Search({ inputValue, showFeatures = true, className = "" }) {
           handleKeyDown={handleKeyDown}
           startListening={startListening}
           isListening={isListening}
+          inputRef={inputRef}
         />
         {showSuggestions && suggestions.length > 0 && (
           <SearchSuggestions

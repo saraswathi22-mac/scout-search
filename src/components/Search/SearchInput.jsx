@@ -7,12 +7,14 @@ function SearchInput({
   handleKeyDown,
   startListening,
   isListening,
+  inputRef,
 }) {
   return (
     <div className="search_data">
       <SearchIcon className="searchIcon" />
 
       <input
+        ref={inputRef}
         type="text"
         value={input}
         onChange={(e) => handleSuggestions(e.target.value)}

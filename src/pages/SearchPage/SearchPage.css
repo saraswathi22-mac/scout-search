@@ -263,21 +263,7 @@ body.dark .resultRow {
   max-width: 95%;
 }
 
-.resultThumbnail {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-top: 18px;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-  image-rendering: auto;
-  flex-shrink: 0;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-}
-
-.resultRow:hover .resultThumbnail {
+.resultRow:hover {
   transform: scale(1.03);
 }
 
@@ -408,14 +394,6 @@ body.dark .resultRow {
     width: 100%;
     overflow: hidden;
     min-width: 0;
-  }
-
-  .resultThumbnail {
-    width: 92px;
-    height: 92px;
-    border-radius: 12px;
-    object-fit: cover;
-    margin-top: 0;
   }
 
   .result {

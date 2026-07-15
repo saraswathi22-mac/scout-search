@@ -13,7 +13,7 @@ import {
   searchPageOptionsRight,
 } from "../../constants";
 import SiteInfo from "../../components/SiteInfo/SiteInfo";
-import { getSiteFavicon } from "../../utils/getSiteFavicon";
+import ResultThumbnail from "../../components/ResultThumbnail/ResultThumbnail";
 import { useDebounce } from "../../hooks/useDebounce";
 import ResultSkeleton from "../../components/ResultSkeleton/ResultSkeleton";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -222,17 +222,7 @@ function SearchPage() {
                   </div>
 
                   {/* 🔹 Thumbnail */}
-                  {item?.pagemap?.cse_image?.[0]?.src && (
-                    <img
-                      className="resultThumbnail"
-                      src={item.pagemap.cse_image[0].src}
-                      alt="Thumbnail"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = getSiteFavicon(item.link);
-                      }}
-                    />
-                  )}
+                  <ResultThumbnail item={item} />
                 </div>
               ))}
             </>

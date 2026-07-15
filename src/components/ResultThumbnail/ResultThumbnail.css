@@ -1,0 +1,44 @@
+.resultThumbnail {
+  display: block;
+  object-fit: cover;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  image-rendering: auto;
+}
+
+.resultThumbnail:hover {
+  transform: scale(1.03);
+}
+
+.faviconThumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-color);
+}
+
+.faviconImage {
+  max-width: 48px;
+  max-height: 48px;
+  object-fit: contain;
+}
+
+.placeholderThumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hover-color);
+  color: var(--text-secondary);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.resultThumbnail,
+.placeholderThumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}

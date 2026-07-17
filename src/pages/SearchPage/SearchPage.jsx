@@ -21,12 +21,13 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useTheme } from "../../context/ThemeContext";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/material/Tooltip";
+import Pagination from "../../components/Pagination/Pagination";
 
 function SearchPage() {
   const { term } = useStateValue();
   const { theme, toggleTheme } = useTheme();
   const debouncedTerm = useDebounce(term?.term, 500);
-  const { data, loading, error } = useSearch(debouncedTerm);
+  const { data, loading, error, page, setPage } = useSearch(debouncedTerm);
 
   const [show, setShow] = useState(false);
   const [activeLabel, setActiveLabel] = useState("All");
@@ -55,6 +56,13 @@ function SearchPage() {
   };
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
+
+  useEffect(() => {
     const closeDropdown = () => setShow(false);
     window.addEventListener("click", closeDropdown);
     return () => window.removeEventListener("click", closeDropdown);
@@ -71,6 +79,13 @@ function SearchPage() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+  if (data) {
+    console.log(data);
+    console.log(data.queries);
+  }
+}, [data]);
 
   return (
     <div className="searchPage">
@@ -225,6 +240,15 @@ function SearchPage() {
                   <ResultThumbnail item={item} />
                 </div>
               ))}
+
+              {data?.items?.length > 0 && (
+                <Pagination
+                  page={page}
+                  setPage={setPage}
+                  hasPreviousPage={!!data?.queries?.previousPage}
+                  hasNextPage={!!data?.queries?.nextPage}
+                />
+              )}
             </>
           ) : (
             <p className="noResults">No results found.</p>

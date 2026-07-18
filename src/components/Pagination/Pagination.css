@@ -16,10 +16,6 @@
   transition: all 0.2s ease;
 }
 
-.paginationBtn:hover:not(:disabled) {
-  background: var(--hover-color);
-}
-
 .paginationBtn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -29,4 +25,14 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--text-secondary);
+}
+
+.paginationBtnActive {
+  background-color: #1a73e8;
+  color: white;
+  border-color: #1a73e8;
+}
+
+.paginationBtn:not(.paginationBtnActive):hover:not(:disabled) {
+  background: var(--hover-color);
 }

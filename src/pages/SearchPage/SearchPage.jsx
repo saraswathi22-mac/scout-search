@@ -80,13 +80,6 @@ function SearchPage() {
     };
   }, []);
 
-  useEffect(() => {
-  if (data) {
-    console.log(data);
-    console.log(data.queries);
-  }
-}, [data]);
-
   return (
     <div className="searchPage">
       {/* 🔹 Header */}
@@ -245,6 +238,7 @@ function SearchPage() {
                 <Pagination
                   page={page}
                   setPage={setPage}
+                  totalPages={10}
                   hasPreviousPage={!!data?.queries?.previousPage}
                   hasNextPage={!!data?.queries?.nextPage}
                 />
